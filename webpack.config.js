@@ -59,6 +59,11 @@ module.exports = {
 				}
 			},
 			{
+				test: /\.(js|mjs|svelte)$/,
+				exclude: /node_modules/,
+				use: ['eslint-loader']
+			},
+			{
 				test: /\.css$/,
 				use: [
 					{
