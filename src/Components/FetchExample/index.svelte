@@ -1,11 +1,11 @@
 <script>
-    import { onMount } from 'svelte';
-    import { Http } from '@Services';
+    import { onMount } from "svelte";
+    import { Http } from "@Services";
 
     let data = [];
 
     onMount(async function() {
-        const response = await Http.Request('GET', '/link/');
+        const response = await Http.Request("GET", "/link/");
         data = response;
     });
 </script>
