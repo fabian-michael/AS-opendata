@@ -7,6 +7,7 @@ module.exports = {
 	],
 	plugins: [
 		'inline-dotenv',
-		'@babel/plugin-transform-strict-mode'
+		'@babel/plugin-transform-strict-mode',
+		'@babel/plugin-transform-runtime'
 	],
 };
