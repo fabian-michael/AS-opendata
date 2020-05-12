@@ -13,7 +13,7 @@ npm install -g yarn
 * Install the dependencies...
 
 ```bash
-cd svelte-app
+cd AS-opendata
 yarn
 ```
 
