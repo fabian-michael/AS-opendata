@@ -8,7 +8,7 @@ const sveltePreprocess = require('svelte-preprocess');
 
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 
-const isInline = process.env.inline;
+const Dotenv = require('dotenv-webpack');
 
 module.exports = {
 	entry: {
@@ -91,6 +91,7 @@ module.exports = {
 		new MiniCssExtractPlugin({
 			filename: '[name].css'
 		}),
+		new Dotenv(),
 		new HtmlWebpackPlugin({
 			template: './src/index.html',
 			title: 'svelte-boilerplate'
