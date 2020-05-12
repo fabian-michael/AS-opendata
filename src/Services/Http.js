@@ -1,5 +1,4 @@
 //#region Global Imports
-require("es6-promise").polyfill();
 require("isomorphic-fetch");
 
 import { stringify } from "query-string";
