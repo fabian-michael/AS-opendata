@@ -4,13 +4,14 @@
 
 * Install [node.js](https://nodejs.org/en/)
 
-* Install yarn 
+* Install yarn
 
 ```bash
 npm install -g yarn
 ```
 
 * Install the dependencies...
+
 
 ```bash
 cd AS-opendata

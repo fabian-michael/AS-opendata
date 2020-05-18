@@ -1,10 +1,8 @@
-import App from './App.svelte';
+import App from "./App/index.svelte";
+import "./Assets/css/global.css";
 
 const app = new App({
-	target: document.body,
-	props: {
-		name: 'world'
-	}
+    target: document.body
 });
 
 window.app = app;
