@@ -64,7 +64,7 @@ module.exports = {
 				use: ['eslint-loader']
 			},
 			{
-				test: /\.css$/,
+				test: /\.s?css$/,
 				use: [
 					{
 						loader: MiniCssExtractPlugin.loader,
