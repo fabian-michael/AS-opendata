@@ -17,7 +17,7 @@ module.exports = {
     }
   ],
   "rules": {
-    "quotes": ["warn", "double"],
+    "quotes": ["warn", "single"],
     "semi": ["error", "always"],
     "eqeqeq": ["error", "always"]
   },
