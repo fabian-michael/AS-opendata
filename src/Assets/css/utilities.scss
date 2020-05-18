@@ -1,0 +1,147 @@
+@use "breakpoints" as *;
+
+.container {
+  width: 100%;
+  margin: 0 auto;
+  @include sm {
+    max-width: $sm;
+  }
+  @include md {
+    max-width: $md;
+  }
+  @include lg {
+    max-width: $lg;
+  }
+  @include xl {
+    max-width: $xl;
+  }
+}
+
+.h-full {
+  height: 100%;
+}
+
+.w-full {
+  width: 100%;
+}
+
+.full {
+  height: 100%;
+  width: 100%;
+}
+
+.h-screen {
+  height: 100%;
+}
+
+.w-screen {
+  width: 100%;
+}
+
+.screen {
+  height: 100%;
+  width: 100%;
+}
+
+.flex {
+  display: flex;
+}
+
+.flex-col {
+  flex-direction: column;
+}
+
+.flex-auto {
+  flex: 1 1 auto;
+}
+
+@mixin spacings {
+  @for $i from 1 through 32 {
+    // margin
+    .m-#{$i} {
+      margin: #{$i/4}em;
+    }
+
+    .mt-#{$i} {
+      margin-top: #{$i/4}em;
+    }
+    .mr-#{$i} {
+      margin-right: #{$i/4}em;
+    }
+    .mb-#{$i} {
+      margin-bottom: #{$i/4}em;
+    }
+    .ml-#{$i} {
+      margin-left: #{$i/4}em;
+    }
+
+    .mx-#{$i} {
+      margin-left: #{$i/4}em;
+      margin-right: #{$i/4}em;
+    }
+    .my-#{$i} {
+      margin-top: #{$i/4}em;
+      margin-bottom: #{$i/4}em;
+    }
+
+    // padding
+    .p-#{$i} {
+      padding: #{$i/4}em;
+    }
+
+    .pt-#{$i} {
+      padding-top: #{$i/4}em;
+    }
+    .pr-#{$i} {
+      padding-right: #{$i/4}em;
+    }
+    .pb-#{$i} {
+      padding-bottom: #{$i/4}em;
+    }
+    .pl-#{$i} {
+      padding-left: #{$i/4}em;
+    }
+
+    .px-#{$i} {
+      padding-left: #{$i/4}em;
+      padding-right: #{$i/4}em;
+    }
+    .py-#{$i} {
+      padding-top: #{$i/4}em;
+      padding-bottom: #{$i/4}em;
+    }
+  }
+}
+
+@include spacings;
+
+// margin auto
+.m-auto {
+  margin: auto;
+}
+
+.mt-auto {
+  margin-top: auto;
+}
+.mr-auto {
+  margin-right: auto;
+}
+.mb-auto {
+  margin-bottom: auto;
+}
+.ml-auto {
+  margin-left: auto;
+}
+
+.mx-auto {
+  margin-left: auto;
+  margin-right: auto;
+}
+.my-auto {
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.center {
+  text-align: center;
+}
