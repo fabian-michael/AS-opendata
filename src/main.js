@@ -1,6 +1,6 @@
-import App from "./App/index.svelte";
-import "./Assets/css/global.css";
-import "./Assets/css/mapbox-gl.css";
+import App from './App/index.svelte';
+import './Assets/css/global.css';
+import './Assets/css/utilities.scss';
 
 const app = new App({
     target: document.body
