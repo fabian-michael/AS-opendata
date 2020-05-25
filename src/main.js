@@ -1,6 +1,8 @@
 import App from './App/index.svelte';
-import './Assets/css/global.css';
-import './Assets/css/utilities.scss';
+import '@Assets/css/global.scss';
+import '@Assets/css/typography.scss';
+import '@Assets/css/utilities.scss';
+
 
 const app = new App({
     target: document.body

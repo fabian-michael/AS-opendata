@@ -1,0 +1,44 @@
+@use 'functions' as *;
+
+$gray: #BBC1C3;
+$gray-light: tint($gray, 66.6667%);
+$gray-lighter: tint($gray, 33.3333%);
+$gray-darker: shade($gray, 33.3333%);
+$gray-dark: shade($gray, 66.6667%);
+
+$purple: #826AED;
+$purple-light: tint($purple, 66.6667%);
+$purple-lighter: tint($purple, 33.3333%);
+$purple-darker: shade($purple, 33.3333%);
+$purple-dark: shade($purple, 66.6667%);
+
+$blue: #75CFF0;
+$blue-light: tint($blue, 66.6667%);
+$blue-lighter: tint($blue, 33.3333%);
+$blue-darker: shade($blue, 33.3333%);
+$blue-dark: shade($blue, 66.6667%);
+
+$green: #B6E59E;
+$green-light: tint($green, 66.6667%);
+$green-lighter: tint($green, 33.3333%);
+$green-darker: shade($green, 33.3333%);
+$green-dark: shade($green, 66.6667%);
+
+$yellow: #FFE666;
+$yellow-light: tint($yellow, 66.6667%);
+$yellow-lighter: tint($yellow, 33.3333%);
+$yellow-darker: shade($yellow, 33.3333%);
+$yellow-dark: shade($yellow, 66.6667%);
+
+$orange: #FFA35C;
+$orange-light: tint($orange, 66.6667%);
+$orange-lighter: tint($orange, 33.3333%);
+$orange-darker: shade($orange, 33.3333%);
+$orange-dark: shade($orange, 66.6667%);
+
+$red: #CC2929;
+$red-light: tint($red, 66.6667%);
+$red-lighter: tint($red, 33.3333%);
+$red-darker: shade($red, 33.3333%);
+$red-dark: shade($red, 66.6667%);
+

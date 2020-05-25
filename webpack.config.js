@@ -20,6 +20,7 @@ module.exports = {
 			'@Components': path.resolve(__dirname, 'src/Components/'),
 			'@Services': path.resolve(__dirname, 'src/Services/'),
 			'@Assets': path.resolve(__dirname, 'src/Assets/'),
+			'@Utilities': path.resolve(__dirname, 'src/Utilities/'),
 		},
 		extensions: ['.mjs', '.js', '.svelte'],
 		mainFields: ['svelte', 'browser', 'module', 'main']
@@ -31,20 +32,20 @@ module.exports = {
 	},
 	module: {
 		rules: [
-			{
-				test: /\.(js|mjs|svelte)$/,
-				exclude: /node_modules\/(?!svelte)/,
-				use: {
-					loader: 'babel-loader',
-					options: {
-						presets: ['@babel/preset-env'],
-						plugins: ['@babel/plugin-proposal-object-rest-spread']
-					}
-				},
-			},
+			// {
+			// 	test: /\.(js|mjs|svelte)$/,
+			// 	exclude: /node_modules\/(?!svelte)/,
+			// 	use: {
+			// 		loader: 'babel-loader',
+			// 		options: {
+			// 			presets: ['@babel/preset-env'],
+			// 			plugins: ['@babel/plugin-proposal-object-rest-spread']
+			// 		}
+			// 	},
+			// },
 			{
 				test: /\.svelte$/,
-				exclude: /node_modules/,
+				exclude: /node_modules\/(?!(svelte-spa-router))/,
 				use: {
 					loader: 'svelte-loader',
 					options: {
@@ -73,6 +74,7 @@ module.exports = {
 						}
 					},
 					'css-loader',
+					'postcss-loader',
 					'sass-loader'
 				]
 			},
@@ -100,6 +102,7 @@ module.exports = {
 	devtool: prod ? false : 'source-map',
 	devServer: {
 		port: 8080,
-		writeToDisk: true
+		writeToDisk: true,
+		host: '0.0.0.0'
 	}
 };

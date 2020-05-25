@@ -1,3 +1,5 @@
+@use 'dev/theme' as *;
+
 /* Box sizing rules */
 *,
 *::before,
@@ -36,6 +38,7 @@ body {
   text-rendering: optimizeSpeed;
   line-height: 1.5;
   font-family: 'Open Sans', sans-serif;
+  color: $gray-dark;
 }
 
 /* Remove list styles on ul, ol elements with a class attribute */
@@ -60,12 +63,30 @@ article > * + * {
   margin-top: 1em;
 }
 
-/* Inherit fonts for inputs and buttons */
+/* reset inputs and buttons */
 input,
 button,
 textarea,
 select {
   font: inherit;
+  border: none;
+  appearance: none;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+button,
+input[type="button"],
+input[type="submit"],
+[role="button"] {
+  cursor: pointer;
+}
+
+[role="button"] {
+  user-select: none;
+  text-align: center;
 }
 
 /* Remove all animations and transitions for people that prefer not to see them */
@@ -76,4 +97,8 @@ select {
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+}
+
+label {
+  cursor: pointer;
 }

@@ -1,5 +1,14 @@
-@use "breakpoints" as *;
+// Utility Classes
+// _______________________________________________
 
+// Imports
+// -----------------------------------------------
+@use "dev/breakpoints" as *;
+@use "dev/functions" as *;
+@use "dev/theme" as *;
+
+// Layout
+// -----------------------------------------------
 .container {
   width: 100%;
   margin: 0 auto;
@@ -17,12 +26,71 @@
   }
 }
 
+.block {
+  display: block;
+}
+
+.inline-block {
+  display: inline-block;
+}
+
+.inline {
+  display: inline;
+}
+
+.visible {
+  visibility: visible;
+  opacity: 1;
+}
+
+.invisible {
+  visibility: hidden;
+  opacity: 0;
+}
+
+.relative {
+  position: relative;
+}
+
+.absolute {
+  position: absolute;
+}
+
+.top-0 {
+  top: 0;
+}
+.right-0 {
+  right: 0;
+}
+.bottom-0 {
+  bottom: 0;
+}
+.left-0 {
+  left: 0;
+}
+
+// Sizing
+// -----------------------------------------------
+.h-0 {
+  height: 0;
+}
+
+.h-auto {
+  height: auto;
+}
+
 .h-full {
   height: 100%;
+}
+.min-h-full {
+  min-height: 100%;
 }
 
 .w-full {
   width: 100%;
+}
+min-w-full {
+  min-width: 100%;
 }
 
 .full {
@@ -31,18 +99,40 @@
 }
 
 .h-screen {
-  height: 100%;
+  height: 100vh;
+}
+.min-h-screen {
+  min-height: 100vh;
 }
 
 .w-screen {
-  width: 100%;
+  width: 100vw;
+}
+min-w-screen {
+  min-width: 100vw;
 }
 
 .screen {
-  height: 100%;
-  width: 100%;
+  height: 100vh;
+  width: 100vw;
 }
 
+@mixin sizings {
+  @for $i from 1 through 32 {
+    .h-#{$i} {
+      height: #{$i/4}em;
+    }
+
+    .w-#{$i} {
+      width: #{$i/4}em;
+    }
+  }
+}
+
+@include sizings;
+
+// Flexbox
+// -----------------------------------------------
 .flex {
   display: flex;
 }
@@ -51,10 +141,31 @@
   flex-direction: column;
 }
 
+.flex-0-1-auto {
+  flex: 0 1 auto;
+}
+
 .flex-auto {
   flex: 1 1 auto;
 }
 
+.flex-wrap {
+  flex-wrap: wrap;
+}
+
+.items-start {
+  align-items: start;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.self-stretch {
+  align-self: stretch;
+}
+// Spacings
+// -----------------------------------------------
 @mixin spacings {
   @for $i from 1 through 32 {
     // margin
@@ -142,6 +253,149 @@
   margin-bottom: auto;
 }
 
-.center {
+// Typography
+// -----------------------------------------------
+.text-center {
   text-align: center;
+}
+
+.font-bold {
+  font-weight: bold;
+}
+
+// Gray
+.text-gray-light {
+  color: $gray-light;
+}
+.text-gray-lighter {
+  color: $gray-lighter;
+}
+.text-gray {
+  color: $gray;
+}
+.text-gray-darker {
+  color: $gray-darker;
+}
+.text-gray-dark {
+  color: $gray-dark;
+}
+
+// Blue
+.text-blue-light {
+  color: $blue-light;
+}
+.text-blue-lighter {
+  color: $blue-lighter;
+}
+.text-blue {
+  color: $blue;
+}
+.text-blue-darker {
+  color: $blue-darker;
+}
+.text-blue-dark {
+  color: $blue-dark;
+}
+
+// Backgrounds
+// -----------------------------------------------
+
+// White
+.bg-white {
+  background-color: white;
+}
+
+// Gray
+.bg-gray-light {
+  background-color: $gray-light;
+}
+.bg-gray-lighter {
+  background-color: $gray-lighter;
+}
+.bg-gray {
+  background-color: $gray;
+}
+.bg-gray-darker {
+  background-color: $gray-darker;
+}
+.bg-gray-dark {
+  background-color: $gray-dark;
+}
+
+// Blue
+.bg-blue-light {
+  background-color: $blue-light;
+}
+.bg-blue-lighter {
+  background-color: $blue-lighter;
+}
+.bg-blue {
+  background-color: $blue;
+}
+.bg-blue-darker {
+  background-color: $blue-darker;
+}
+.bg-blue-dark {
+  background-color: $blue-dark;
+}
+
+// Border
+// -----------------------------------------------
+.border-none {
+  border-style: none;
+}
+.rounded {
+  border-radius: 0.25em;
+}
+.rounded-b {
+  border-bottom-left-radius: 0.25em;
+  border-bottom-right-radius: 0.25em;
+}
+.rounded-lg {
+  border-radius: 0.5em;
+}
+
+// Effects
+// -----------------------------------------------
+
+.shadow {
+  box-shadow:
+  0 0.175em 0.1375em rgba(0, 0, 0, 0.072),
+  0 0.41875em 0.33125em rgba(0, 0, 0, 0.086),
+  0 0.78125em 0.625em rgba(0, 0, 0, 0.12);
+}
+.shadow-md {
+  box-shadow:
+          0 0.175em 0.1375em rgba(0, 0, 0, 0.06),
+          0 0.41875em 0.33125em rgba(0, 0, 0, 0.072),
+          0 0.78125em 0.625em rgba(0, 0, 0, 0.086),
+          0 1.39375em 1.11875em rgba(0, 0, 0, 0.12);
+}
+.shadow-lg {
+  box-shadow:
+          0 0.175em 0.1375em rgba(0, 0, 0, 0.048),
+          0 0.41875em 0.33125em rgba(0, 0, 0, 0.06),
+          0 0.78125em 0.625em rgba(0, 0, 0, 0.072),
+          0 1.39375em 1.11875em rgba(0, 0, 0, 0.086),
+          0 2.6125em 2.0875em rgba(0, 0, 0, 0.12);
+}
+.shadow-xl {
+  box-shadow:
+          0 0.175em 0.1375em rgba(0, 0, 0, 0.034),
+          0 0.41875em 0.33125em rgba(0, 0, 0, 0.048),
+          0 0.78125em 0.625em rgba(0, 0, 0, 0.06),
+          0 1.39375em 1.11875em rgba(0, 0, 0, 0.072),
+          0 2.6125em 2.0875em rgba(0, 0, 0, 0.086),
+          0 6.25em 5em rgba(0, 0, 0, 0.12);
+}
+
+.overflow-hidden {
+  overflow: hidden;
+}
+
+// Interactivity
+// -----------------------------------------------
+
+.cursor-pointer {
+  cursor: pointer;
 }
