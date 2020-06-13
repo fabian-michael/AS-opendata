@@ -83,7 +83,6 @@
 
     let showDrawer = true;
     let loading = false;
-    let filterTimeout;
 
     function handleFilter(e) {
         const {detail} = e;
