@@ -34,17 +34,13 @@ module.exports = {
 	},
 	module: {
 		rules: [
-			// {
-			// 	test: /\.(js|mjs|svelte)$/,
-			// 	exclude: /node_modules\/(?!svelte)/,
-			// 	use: {
-			// 		loader: 'babel-loader',
-			// 		options: {
-			// 			presets: ['@babel/preset-env'],
-			// 			plugins: ['@babel/plugin-proposal-object-rest-spread']
-			// 		}
-			// 	},
-			// },
+			{
+				test: /\.(js|mjs|svelte)$/,
+				exclude: /node_modules\/(?!svelte)/,
+				use: {
+					loader: 'babel-loader',
+				},
+			},
 			{
 				test: /\.svelte$/,
 				use: {
