@@ -4,7 +4,6 @@
 
 <script>
     import uid from 'uid';
-    import Label from '@Components/Label';
 
     export let items = [];
     export let name = null;
@@ -63,11 +62,11 @@
 
 <div class="select relative" class:disabled>
     {#if label}
-        <label class="block"
+        <label class="block font-bold"
                id="label_{id}"
                for="select_{id}"
         >
-            <Label text="{label}" bold />
+            {label}
         </label>
     {/if}
 

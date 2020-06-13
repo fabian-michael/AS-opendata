@@ -1,19 +1,19 @@
 @use 'dev/variables' as *;
 
-/* Box sizing rules */
+//  Box sizing rules 
 *,
 *::before,
 *::after {
   box-sizing: border-box;
 }
 
-/* Remove default padding */
+//  Remove default padding 
 ul[class],
 ol[class] {
   padding: 0;
 }
 
-/* Remove default margin */
+//  Remove default margin 
 body,
 h1,
 h2,
@@ -31,7 +31,7 @@ dd {
   margin: 0;
 }
 
-/* Set core body defaults */
+//  Set core body defaults 
 body {
   min-height: 100vh;
   scroll-behavior: smooth;
@@ -43,29 +43,19 @@ body {
   flex-direction: column;
 }
 
-/* Remove list styles on ul, ol elements with a class attribute */
-ul[class],
-ol[class] {
+//  Remove list styles on ul, ol elements
+ul,
+ol {
   list-style: none;
 }
 
-/* A elements that don't have a class get default styles */
-a:not([class]) {
-  text-decoration-skip-ink: auto;
-}
-
-/* Make images easier to work with */
+//  Make images easier to work with 
 img {
   max-width: 100%;
   display: block;
 }
 
-/* Natural flow and rhythm in articles by default */
-article > * + * {
-  margin-top: 1em;
-}
-
-/* reset inputs and buttons */
+//  reset inputs and buttons
 input,
 button,
 textarea,
@@ -79,23 +69,20 @@ select {
   }
 }
 
+// hide -webkit-search-decoration on safari
 input[type="search"]::-webkit-search-decoration {
   display: none;
 }
 
+
 button,
 input[type="button"],
-input[type="submit"],
-[role="button"] {
+input[type="submit"]
+{
   cursor: pointer;
 }
 
-[role="button"] {
-  user-select: none;
-  text-align: center;
-}
-
-/* Remove all animations and transitions for people that prefer not to see them */
+//  Remove all animations and transitions for people that prefer not to see them
 @media (prefers-reduced-motion: reduce) {
   * {
     animation-duration: 0.01ms !important;

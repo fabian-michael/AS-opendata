@@ -78,12 +78,14 @@
     import Loader from "@Components/Loader";
     import Data from '@Stores/data.store';
 
+    // coordinates of berlin to initialize map
     const BERLIN_LAT = 52.520008;
     const BERLIN_LON = 13.404954;
 
     let showDrawer = true;
 
     function handleFilter(e) {
+        // e.detail hold the filter object
         const {detail} = e;
          Data.makeRequest(detail);
     }

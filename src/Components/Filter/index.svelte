@@ -210,7 +210,7 @@
     let form;
     let q;
 
-    $: console.log(filter.q);
+    // automatically dispatch "filter" event with filter attached on change
     $: dispatch('filter', filter);
 
     function handleSearch() {

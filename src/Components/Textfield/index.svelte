@@ -56,7 +56,6 @@
 
 <script>
     import uid from 'uid';
-    import Label from '@Components/Label';
 
     const types = [
         'text',
@@ -79,17 +78,21 @@
 
     const klass = 'block w-full p-2 flex-auto';
 
+    // if prop type has an invalid value set it to "text"
     $: !types.includes(type) ? type = 'text' : null;
 </script>
 
 <div class:disabled>
     {#if label}
-        <label class="block" for={id}>
-            <Label text="{label}" bold />
+        <label class="block font-bold" for={id}>
+            {label}
         </label>
     {/if}
     <div class="input rounded shadow mt-2 mb-4 overflow-hidden flex" >
+
+        <!-- cannot set type={type} because svelte does not allow that -->
         {#if type === 'text'}
+            <!-- on:blur, ... event forwarding to let users of this component listen to them -->
             <input class={klass} type="text" {name} {id} {required} {disabled} {placeholder} bind:value
                    on:blur
                    on:change

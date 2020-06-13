@@ -9,10 +9,15 @@
     let container;
     let map;
 
+    // automatically init/update map if data changes
     $: if (map && map.isStyleLoaded() && data) {
         if (map.getSource('data')) {
+            //update
             map.getSource('data').setData(data);
         } else {
+            //init
+
+            // attach data to map with key "data"
             map.addSource("data", {
                 type: "geojson",
                 data,
@@ -21,6 +26,7 @@
                 clusterRadius: 50
             });
 
+            // add a layer for the cluster circles
             map.addLayer({
                 id: "data",
                 type: "circle",
@@ -47,6 +53,7 @@
                 },
             });
 
+            // add a layer for the cluster count
             map.addLayer({
                 id: 'cluster-count',
                 type: 'symbol',
@@ -61,6 +68,7 @@
                 },
             });
 
+            // add a layer for the unclustered points
             map.addLayer({
                 id: 'unclustered-point',
                 type: 'circle',
@@ -85,6 +93,7 @@
             zoom,
         });
 
+        // user localisation
         map.addControl(
             new mapboxgl.GeolocateControl({
                 positionOptions: {
@@ -105,19 +114,13 @@
         map.on('click', 'data', function (e) {
             let coordinates = e.features[0].geometry.coordinates.slice();
             let properties = e.features[0].properties;
+
+            // return if clicked on a cluster
             if (properties.cluster === true) return false;
 
             let data = JSON.parse(properties.data);
 
-            console.log(data);
-
-            // Ensure that if the map is zoomed out such that multiple
-            // copies of the feature are visible, the popup appears
-            // over the copy being pointed to.
-            while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
-                coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
-            }
-
+            // create the popup
             new mapboxgl.Popup()
                     .setLngLat(coordinates)
                     .setHTML(`
