@@ -5,7 +5,7 @@
 // -----------------------------------------------
 @use "dev/breakpoints" as *;
 @use "dev/functions" as *;
-@use "dev/theme" as *;
+@use "dev/variables" as *;
 
 // Layout
 // -----------------------------------------------
@@ -69,6 +69,12 @@
   left: 0;
 }
 
+@for $i from 0 through 5 {
+  .z-#{$i * 10} {
+    z-index: $i * 10;
+  }
+}
+
 // Sizing
 // -----------------------------------------------
 .h-0 {
@@ -100,9 +106,11 @@ min-w-full {
 
 .h-screen {
   height: 100vh;
+  height: stretch;
 }
 .min-h-screen {
   min-height: 100vh;
+  min-height: stretch;
 }
 
 .w-screen {
@@ -117,19 +125,31 @@ min-w-screen {
   width: 100vw;
 }
 
-@mixin sizings {
-  @for $i from 1 through 32 {
-    .h-#{$i} {
-      height: #{$i/4}em;
-    }
+@for $i from 0 through 128 {
+  .h-#{$i} {
+    height: #{$i/4}rem;
+  }
 
-    .w-#{$i} {
-      width: #{$i/4}em;
-    }
+  .min-h-#{$i} {
+    min-height: #{$i/4}rem;
+  }
+
+  .max-h-#{$i} {
+    max-height: #{$i/4}rem;
+  }
+
+  .w-#{$i} {
+    width: #{$i/4}rem;
+  }
+
+  .min-w-#{$i} {
+    min-width: #{$i/4}rem;
+  }
+
+  .max-w-#{$i} {
+    max-width: #{$i/4}rem;
   }
 }
-
-@include sizings;
 
 // Flexbox
 // -----------------------------------------------
@@ -166,65 +186,61 @@ min-w-screen {
 }
 // Spacings
 // -----------------------------------------------
-@mixin spacings {
-  @for $i from 1 through 32 {
-    // margin
-    .m-#{$i} {
-      margin: #{$i/4}em;
-    }
+@for $i from 0 through 32 {
+  // margin
+  .m-#{$i} {
+    margin: #{$i/4}rem;
+  }
 
-    .mt-#{$i} {
-      margin-top: #{$i/4}em;
-    }
-    .mr-#{$i} {
-      margin-right: #{$i/4}em;
-    }
-    .mb-#{$i} {
-      margin-bottom: #{$i/4}em;
-    }
-    .ml-#{$i} {
-      margin-left: #{$i/4}em;
-    }
+  .mt-#{$i} {
+    margin-top: #{$i/4}rem;
+  }
+  .mr-#{$i} {
+    margin-right: #{$i/4}rem;
+  }
+  .mb-#{$i} {
+    margin-bottom: #{$i/4}rem;
+  }
+  .ml-#{$i} {
+    margin-left: #{$i/4}rem;
+  }
 
-    .mx-#{$i} {
-      margin-left: #{$i/4}em;
-      margin-right: #{$i/4}em;
-    }
-    .my-#{$i} {
-      margin-top: #{$i/4}em;
-      margin-bottom: #{$i/4}em;
-    }
+  .mx-#{$i} {
+    margin-left: #{$i/4}rem;
+    margin-right: #{$i/4}rem;
+  }
+  .my-#{$i} {
+    margin-top: #{$i/4}rem;
+    margin-bottom: #{$i/4}rem;
+  }
 
-    // padding
-    .p-#{$i} {
-      padding: #{$i/4}em;
-    }
+  // padding
+  .p-#{$i} {
+    padding: #{$i/4}rem;
+  }
 
-    .pt-#{$i} {
-      padding-top: #{$i/4}em;
-    }
-    .pr-#{$i} {
-      padding-right: #{$i/4}em;
-    }
-    .pb-#{$i} {
-      padding-bottom: #{$i/4}em;
-    }
-    .pl-#{$i} {
-      padding-left: #{$i/4}em;
-    }
+  .pt-#{$i} {
+    padding-top: #{$i/4}rem;
+  }
+  .pr-#{$i} {
+    padding-right: #{$i/4}rem;
+  }
+  .pb-#{$i} {
+    padding-bottom: #{$i/4}rem;
+  }
+  .pl-#{$i} {
+    padding-left: #{$i/4}rem;
+  }
 
-    .px-#{$i} {
-      padding-left: #{$i/4}em;
-      padding-right: #{$i/4}em;
-    }
-    .py-#{$i} {
-      padding-top: #{$i/4}em;
-      padding-bottom: #{$i/4}em;
-    }
+  .px-#{$i} {
+    padding-left: #{$i/4}rem;
+    padding-right: #{$i/4}rem;
+  }
+  .py-#{$i} {
+    padding-top: #{$i/4}rem;
+    padding-bottom: #{$i/4}rem;
   }
 }
-
-@include spacings;
 
 // margin auto
 .m-auto {
@@ -255,6 +271,10 @@ min-w-screen {
 
 // Typography
 // -----------------------------------------------
+.text-base {
+  font-size: 1rem;
+}
+
 .text-center {
   text-align: center;
 }
@@ -295,6 +315,21 @@ min-w-screen {
 }
 .text-blue-dark {
   color: $blue-dark;
+}
+
+// White
+.text-white {
+  color: white;
+}
+
+.leading-none {
+  line-height: 1;
+}
+.leading-normal {
+  line-height: 1.5;
+}
+.leading-loose {
+  line-height: 2;
 }
 
 // Backgrounds
@@ -345,14 +380,14 @@ min-w-screen {
   border-style: none;
 }
 .rounded {
-  border-radius: 0.25em;
+  border-radius: 0.25rem;
 }
 .rounded-b {
-  border-bottom-left-radius: 0.25em;
-  border-bottom-right-radius: 0.25em;
+  border-bottom-left-radius: 0.25rem;
+  border-bottom-right-radius: 0.25rem;
 }
 .rounded-lg {
-  border-radius: 0.5em;
+  border-radius: 0.5rem;
 }
 
 // Effects
@@ -360,33 +395,33 @@ min-w-screen {
 
 .shadow {
   box-shadow:
-  0 0.175em 0.1375em rgba(0, 0, 0, 0.072),
-  0 0.41875em 0.33125em rgba(0, 0, 0, 0.086),
-  0 0.78125em 0.625em rgba(0, 0, 0, 0.12);
+  0 0.175rem 0.1375rem rgba(0, 0, 0, 0.072),
+  0 0.41875rem 0.33125rem rgba(0, 0, 0, 0.086),
+  0 0.78125rem 0.625rem rgba(0, 0, 0, 0.12);
 }
 .shadow-md {
   box-shadow:
-          0 0.175em 0.1375em rgba(0, 0, 0, 0.06),
-          0 0.41875em 0.33125em rgba(0, 0, 0, 0.072),
-          0 0.78125em 0.625em rgba(0, 0, 0, 0.086),
-          0 1.39375em 1.11875em rgba(0, 0, 0, 0.12);
+          0 0.175rem 0.1375rem rgba(0, 0, 0, 0.06),
+          0 0.41875rem 0.33125rem rgba(0, 0, 0, 0.072),
+          0 0.78125rem 0.625rem rgba(0, 0, 0, 0.086),
+          0 1.39375rem 1.11875rem rgba(0, 0, 0, 0.12);
 }
 .shadow-lg {
   box-shadow:
-          0 0.175em 0.1375em rgba(0, 0, 0, 0.048),
-          0 0.41875em 0.33125em rgba(0, 0, 0, 0.06),
-          0 0.78125em 0.625em rgba(0, 0, 0, 0.072),
-          0 1.39375em 1.11875em rgba(0, 0, 0, 0.086),
-          0 2.6125em 2.0875em rgba(0, 0, 0, 0.12);
+          0 0.175rem 0.1375rem rgba(0, 0, 0, 0.048),
+          0 0.41875rem 0.33125rem rgba(0, 0, 0, 0.06),
+          0 0.78125rem 0.625rem rgba(0, 0, 0, 0.072),
+          0 1.39375rem 1.11875rem rgba(0, 0, 0, 0.086),
+          0 2.6125rem 2.0875rem rgba(0, 0, 0, 0.12);
 }
 .shadow-xl {
   box-shadow:
-          0 0.175em 0.1375em rgba(0, 0, 0, 0.034),
-          0 0.41875em 0.33125em rgba(0, 0, 0, 0.048),
-          0 0.78125em 0.625em rgba(0, 0, 0, 0.06),
-          0 1.39375em 1.11875em rgba(0, 0, 0, 0.072),
-          0 2.6125em 2.0875em rgba(0, 0, 0, 0.086),
-          0 6.25em 5em rgba(0, 0, 0, 0.12);
+          0 0.175rem 0.1375rem rgba(0, 0, 0, 0.034),
+          0 0.41875rem 0.33125rem rgba(0, 0, 0, 0.048),
+          0 0.78125rem 0.625rem rgba(0, 0, 0, 0.06),
+          0 1.39375rem 1.11875rem rgba(0, 0, 0, 0.072),
+          0 2.6125rem 2.0875rem rgba(0, 0, 0, 0.086),
+          0 6.25rem 5rem rgba(0, 0, 0, 0.12);
 }
 
 .overflow-hidden {

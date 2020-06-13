@@ -5,13 +5,11 @@
 <script>
     import uid from 'uid';
     import Label from '@Components/Label';
-    import {onMount, onDestroy} from 'svelte';
-    import {isOutOfViewport} from '@Utilities/viewport';
 
     export let items = [];
-    export let name;
+    export let name = null;
     export let id = uid();
-    export let value;
+    export let value = null;
     export let label = null;
     export let placeholder = 'Auswählen...';
     export let disabled = false;
@@ -22,75 +20,16 @@
     $: value = selectedElement ? selectedElement.getAttribute('data-value') : undefined;
     //$: selectedElement ? selectedElement.focus() : null;
 
-    function open() {
-        if (closeCurrent && closeCurrent !== close) {
-            closeCurrent();
-        }
-        closeCurrent = close;
-        isOpen = true;
-        listbox.focus();
-        let isOut = isOutOfViewport(listbox);
-        if(isOut.bottom) {
-            listbox.classList.add('top');
-        }
-    }
 
-    function close() {
-        if (isOpen) {
-            isOpen = false;
-            closeCurrent = undefined;
-        }
-    }
-
-    function toggle() {
-        isOpen ? close() : open();
-    }
-
-    function handleKeydown(e) {
-        switch (e.keyCode) {
-            case 13: // Enter
-                toggle();
-                break;
-            case 27: // Esc
-                close();
-                break;
-            case 32: // Space
-                if (!isOpen) open();
-                break;
-            case 38:
-                if (!selectedElement)
-                    selectedElement = listbox.firstChild;
-                else if (selectedElement.previousSibling)
-                    selectedElement = selectedElement.previousSibling;
-                break;
-            case 40: // Down Arrow
-                // if(!isOpen) open();
-                if (!selectedElement)
-                    selectedElement = listbox.firstChild;
-                else if (selectedElement.nextSibling)
-                    selectedElement = selectedElement.nextSibling;
-
-        }
-    }
-
-    function handleDocumentClick() {
-        setTimeout(close, 50);
-    }
-
-    onMount(() => {
-        document.addEventListener('click', handleDocumentClick);
-    });
-
-    onDestroy(() => {
-        document.removeEventListener('click', handleDocumentClick);
-    });
 </script>
 
 <style lang="scss">
-    @use "../../Assets/css/dev/theme" as *;
+    @use "../../Assets/css/dev/variables" as *;
 
     select {
         appearance: none;
+        text-align: center;
+        text-align-last: center;
     }
 
     @keyframes gradient {
@@ -130,10 +69,9 @@
 
 
 
-<div class="select relative">
+<div class="select relative" class:disabled>
     {#if label}
         <label class="block"
-               class:disabled
                id="label_{id}"
                for="select_{id}"
         >
@@ -142,12 +80,12 @@
     {/if}
 
     <div class="wrapper mt-2 mb-4 rounded shadow bg-gray-light text-gray-dark cursor-pointer overflow-hidden">
-        <select class="block w-full  px-6 py-2"
-                class:disabled
+        <select class="block w-full p-2"
                 id="select_{id}"
+                {name}
                 bind:value
         >
-            <option selected="selected">{placeholder}</option>
+            <option selected="selected" value={null}>{placeholder}</option>
             {#each items as val, i}
                 <option value={val}>
                     {val}

@@ -1,27 +1,34 @@
 module.exports = {
-  "parserOptions": {
-    "ecmaVersion": 2019,
-    "sourceType": "module"
+  parser: "@typescript-eslint/parser",
+  parserOptions: {
+    ecmaVersion: 2019,
+    sourceType: "module",
+    tsconfigRootDir: __dirname,
+    project: ["./tsconfig.json"],
   },
-  "env": {
-    "es6": true,
-    "browser": true
+  env: {
+    es6: true,
+    browser: true
   },
-  "plugins": [
+  plugins: [
+    "@typescript-eslint",
     "svelte3"
   ],
-  "overrides": [
+  extends: [
+    "plugin:@typescript-eslint/recommended"
+  ],
+  overrides: [
     {
-      "files": ["**/*.svelte"],
-      "processor": "svelte3/svelte3"
+      files: ["**/*.svelte"],
+      processor: "svelte3/svelte3"
     }
   ],
-  "rules": {
-    "quotes": ["warn", "single"],
-    "semi": ["error", "always"],
-    "eqeqeq": ["error", "always"]
+  rules: {
+    quotes: ["warn", "single"],
+    semi: ["error", "always"],
+    eqeqeq: ["error", "always"]
   },
-  "settings": {
+  settings: {
     "svelte3/ignore-styles": () => true
   }
 }

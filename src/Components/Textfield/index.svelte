@@ -1,5 +1,5 @@
 <style lang="scss">
-    @use "../../Assets/css/dev/theme" as *;
+    @use "../../Assets/css/dev/variables" as *;
 
     @keyframes gradient {
         0%{background-position:0 0}
@@ -47,6 +47,11 @@
             outline: none;
         }
     }
+
+	.disabled {
+        pointer-events: none;
+        opacity: 0.5;
+    }
 </style>
 
 <script>
@@ -55,6 +60,7 @@
 
     const types = [
         'text',
+        'search',
         'email',
         'tel',
         'password',
@@ -63,35 +69,101 @@
     ];
 
     export let type = 'text';
-    export let name = null;
+    export let name = undefined;
     export let id = uid();
-    export let label = null;
-    export let placeholder = null;
-    export let required = false;
-    export let value = null;
+    export let label = undefined;
+    export let placeholder = undefined;
+	export let required = false;
+	export let disabled = false;
+    export let value = '';
 
-    const klass = 'block w-full px-6 py-2';
+    const klass = 'block w-full p-2 flex-auto';
 
     $: !types.includes(type) ? type = 'text' : null;
 </script>
 
-<div>
+<div class:disabled>
     {#if label}
         <label class="block" for={id}>
             <Label text="{label}" bold />
         </label>
     {/if}
-    <div class="input rounded shadow mt-2 mb-4 overflow-hidden">
+    <div class="input rounded shadow mt-2 mb-4 overflow-hidden flex" >
         {#if type === 'text'}
-            <input class={klass} type="text" {name} {id} {required} {placeholder} bind:value />
+            <input class={klass} type="text" {name} {id} {required} {disabled} {placeholder} bind:value
+                   on:blur
+                   on:change
+                   on:focus
+                   on:select
+                   on:submit
+                   on:reset
+                   on:keydown
+                   on:keypress
+                   on:keyup
+            />
         {:else if type === 'email'}
-            <input class={klass} type="email" {name} {id} {required} {placeholder} bind:value />
+            <input class={klass} type="email" {name} {id} {required} {disabled} {placeholder} bind:value
+                   on:blur
+                   on:change
+                   on:focus
+                   on:select
+                   on:submit
+                   on:reset
+                   on:keydown
+                   on:keypress
+                   on:keyup
+            />
+        {:else if type === 'search'}
+            <input class={klass} type="search" {name} {id} {required} {disabled} {placeholder} bind:value
+                   on:blur
+                   on:change
+                   on:focus
+                   on:select
+                   on:submit
+                   on:reset
+                   on:keydown
+                   on:keypress
+                   on:keyup
+            />
         {:else if type === 'password'}
-            <input class={klass} type="password" {name} {id} {required} {placeholder} bind:value />
+            <input class={klass} type="password" {name} {id} {required} {disabled} {placeholder} bind:value
+                   on:blur
+                   on:change
+                   on:focus
+                   on:select
+                   on:submit
+                   on:reset
+                   on:keydown
+                   on:keypress
+                   on:keyup
+            />
         {:else if type === 'date'}
-            <input class={klass} type="date" {name} {id} {required} {placeholder} bind:value />
+            <input class={klass} type="date" {name} {id} {required} {disabled} {placeholder} bind:value
+                   on:blur
+                   on:change
+                   on:focus
+                   on:select
+                   on:submit
+                   on:reset
+                   on:keydown
+                   on:keypress
+                   on:keyup
+            />
         {:else if type === 'textarea'}
-            <textarea class={klass} {name} {id} {required} {placeholder} bind:value />
+            <textarea class={klass} {name} {id} {required} {disabled} {placeholder} bind:value
+                      on:blur
+                      on:change
+                      on:focus
+                      on:select
+                      on:submit
+                      on:reset
+                      on:keydown
+                      on:keypress
+                      on:keyup
+            ></textarea>
         {/if}
+        <div class="">
+            <slot name="right" />
+        </div>
     </div>
 </div>

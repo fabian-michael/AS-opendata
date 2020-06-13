@@ -1,4 +1,4 @@
-@use 'dev/theme' as *;
+@use 'dev/variables' as *;
 
 /* Box sizing rules */
 *,
@@ -39,6 +39,8 @@ body {
   line-height: 1.5;
   font-family: 'Open Sans', sans-serif;
   color: $gray-dark;
+  display: flex;
+  flex-direction: column;
 }
 
 /* Remove list styles on ul, ol elements with a class attribute */
@@ -75,6 +77,10 @@ select {
   &:focus {
     outline: none;
   }
+}
+
+input[type="search"]::-webkit-search-decoration {
+  display: none;
 }
 
 button,

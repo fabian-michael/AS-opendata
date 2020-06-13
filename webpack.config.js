@@ -6,13 +6,13 @@ const prod = mode === 'production';
 
 const sveltePreprocess = require('svelte-preprocess');
 
-const HtmlWebpackPlugin = require('html-webpack-plugin')
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const Dotenv = require('dotenv-webpack');
 
 module.exports = {
 	entry: {
-		bundle: ['./src/main.js']
+		bundle: ['./src/main.ts']
 	},
 	resolve: {
 		alias: {
@@ -21,8 +21,10 @@ module.exports = {
 			'@Services': path.resolve(__dirname, 'src/Services/'),
 			'@Assets': path.resolve(__dirname, 'src/Assets/'),
 			'@Utilities': path.resolve(__dirname, 'src/Utilities/'),
+			'@Stores': path.resolve(__dirname, 'src/Stores/'),
+			'@Types': path.resolve(__dirname, 'src/Types/'),
 		},
-		extensions: ['.mjs', '.js', '.svelte'],
+		extensions: ['.mjs', '.js', '.svelte', '.ts'],
 		mainFields: ['svelte', 'browser', 'module', 'main']
 	},
 	output: {
@@ -45,7 +47,6 @@ module.exports = {
 			// },
 			{
 				test: /\.svelte$/,
-				exclude: /node_modules\/(?!(svelte-spa-router))/,
 				use: {
 					loader: 'svelte-loader',
 					options: {
@@ -54,6 +55,9 @@ module.exports = {
 						preprocess: sveltePreprocess({
 							scss: {
 								renderSync: true
+							},
+							typescript: {
+								transpileOnly: true,
 							}
 						})
 					}
@@ -63,6 +67,17 @@ module.exports = {
 				test: /\.(js|mjs|svelte)$/,
 				exclude: /node_modules/,
 				use: ['eslint-loader']
+			},
+			{
+				test: /\.ts$/,
+				use: [
+					{
+						loader: 'ts-loader',
+						options: {
+							transpileOnly: true,
+						}
+					}
+				]
 			},
 			{
 				test: /\.s?css$/,
@@ -101,7 +116,7 @@ module.exports = {
 	],
 	devtool: prod ? false : 'source-map',
 	devServer: {
-		port: 8080,
+		port: 3000,
 		writeToDisk: true,
 		host: '0.0.0.0'
 	}

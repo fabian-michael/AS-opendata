@@ -1,8 +1,13 @@
 <script>
-	import Textfield from '@Components/Textfield';
-	import Select from '@Components/Select';
+    import Textfield from '@Components/Textfield';
+    import Select from '@Components/Select';
+    import {createEventDispatcher} from 'svelte';
+    import {SearchIcon} from 'svelte-feather-icons';
 
-	const PLZ = [
+    const dispatch = createEventDispatcher();
+
+
+    const PLZ = [
         '10115',
         '10117',
         '10119',
@@ -179,39 +184,48 @@
         '14195',
         '14197',
         '14199'
-	];
-
-	const CATEGORIES = [
-            'Baumarkt',
-            'Blumenladen',
-            'Buchhandlung',
-            'Bürobedarf',
-            'Gastronomie (Café, Restaurant, Imbiss, Lebensmittelhandlung, usw.)',
-            'Gesundheit',
-            'Getränkemarkt',
-            'Haushalt',
-            'Möbel',
-            'Mode / Bekleidung',
-            'Sportwaren (inkl. Fahrradgeschäfte)',
-            'Anderes (bitte bei der nächsten Frage beschreiben)'
+    ];
+    const CATEGORIES = [
+        'Baumarkt',
+        'Blumenladen',
+        'Buchhandlung',
+        'Bürobedarf',
+        'Gastronomie (Café, Restaurant, Imbiss, Lebensmittelhandlung, usw.)',
+        'Gesundheit',
+        'Getränkemarkt',
+        'Haushalt',
+        'Möbel',
+        'Mode / Bekleidung',
+        'Sportwaren (inkl. Fahrradgeschäfte)',
+        'Anderes (bitte bei der nächsten Frage beschreiben)'
     ];
 
     export let disabled = false;
-    export let filter;
-    let q = null;
-    let plz = null;
-    let category = null;
-
-    $: filter = {
-            q,
-            plz,
-            category
+    export let filter = {
+        q: '',
+        plz: null,
+        art: null
     };
+
+    let form;
+    let q;
+
+    $: console.log(filter.q);
+    $: dispatch('filter', filter);
+
+    function handleSearch() {
+        if(filter.q !== q)
+            filter.q = q
+    }
 </script>
 
 
 <div class="filter">
-	<Textfield label="Stichwortsuche" placeholder="Restaurant, Bar ..." {disabled} />
-	<Select label="Postleitzahl" placeholder="-- Alle --" items={PLZ} bind:value={plz} {disabled} />
-	<Select label="Art" placeholder="-- Alle --" items={CATEGORIES} bind:value={category} {disabled} />
+    <form bind:this={form} on:submit|preventDefault={handleSearch}>
+        <Textfield type="search" label="Stichwortsuche" placeholder="Restaurant, Bar ..." bind:value={q} on:blur={handleSearch} {disabled}>
+            <button slot="right" class="bg-blue text-white h-full px-4 mx-0"><SearchIcon size="1x" /></button>
+        </Textfield>
+        <Select label="Postleitzahl" placeholder="-- Alle --" items={PLZ} bind:value={filter.plz} {disabled} />
+        <Select label="Art" placeholder="-- Alle --" items={CATEGORIES} bind:value={filter.art} {disabled} />
+    </form>
 </div>
