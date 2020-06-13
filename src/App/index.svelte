@@ -82,7 +82,6 @@
     const BERLIN_LON = 13.404954;
 
     let showDrawer = true;
-    let loading = false;
 
     function handleFilter(e) {
         const {detail} = e;

@@ -13,14 +13,6 @@
     export let label = null;
     export let placeholder = 'Auswählen...';
     export let disabled = false;
-    let isOpen = false;
-    let listbox;
-    let button;
-    let selectedElement;
-    $: value = selectedElement ? selectedElement.getAttribute('data-value') : undefined;
-    //$: selectedElement ? selectedElement.focus() : null;
-
-
 </script>
 
 <style lang="scss">
