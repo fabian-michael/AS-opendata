@@ -1,4 +1,5 @@
-import "@babel/polyfill";
+import 'isomorphic-fetch';
+
 import dotenv from 'dotenv';
 import nock from 'nock';
 import { cleanup } from '@testing-library/svelte'

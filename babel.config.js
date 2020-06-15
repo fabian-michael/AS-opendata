@@ -1,9 +1,15 @@
 module.exports = {
 	presets: [
-		['@babel/preset-env', {
-			useBuiltIns: 'usage',
-			corejs: '3.6'
-		}],
+		[
+
+			'@babel/preset-env', {
+				targets: {
+					node: 'current',
+				},
+				useBuiltIns: 'entry',
+				corejs: '3.6'
+			}
+		],
 	],
 	plugins: [
 		'inline-dotenv',

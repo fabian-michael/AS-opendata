@@ -4,8 +4,7 @@ const path = require('path');
 const mode = process.env.NODE_ENV || 'development';
 const prod = mode === 'production';
 
-const sveltePreprocess = require('svelte-preprocess');
-
+const svelteConfig = require('./svelte.config');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const Dotenv = require('dotenv-webpack');
@@ -45,18 +44,7 @@ module.exports = {
 				test: /\.svelte$/,
 				use: {
 					loader: 'svelte-loader',
-					options: {
-						emitCss: true,
-						hotReload: true,
-						preprocess: sveltePreprocess({
-							scss: {
-								renderSync: true
-							},
-							typescript: {
-								transpileOnly: true,
-							}
-						})
-					}
+					options: svelteConfig
 				}
 			},
 			{

@@ -22,8 +22,9 @@ function createStore() {
 		async makeRequest(filter: Filter) {
 			try {
 				loading.set(true);
-				const response = await API.get('', filter) as FeatureCollection;
-				data.set(response);
+				const response = await API.get('', filter);
+				const gjson = await response.json() as FeatureCollection;
+				data.set(gjson);
 			} catch(e) {
 				alert("Something went wrong");
 			} finally {

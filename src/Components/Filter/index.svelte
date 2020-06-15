@@ -209,20 +209,25 @@
 
     let form;
     let q;
+    $: q = filter.q;
 
     // automatically dispatch "filter" event with filter attached on change
     $: dispatch('filter', filter);
 
-    function handleSearch() {
-        if(filter.q !== q)
-            filter.q = q
+    function handleSearch(event) {
+        let data = new FormData(event.target);
+        let _q = data.get('q');
+        if(filter.q !== _q) {
+            filter.q = _q
+            q = _q;
+        }
     }
 </script>
 
 
 <div class="filter">
     <form bind:this={form} on:submit|preventDefault={handleSearch}>
-        <Textfield type="search" label="Stichwortsuche" placeholder="Restaurant, Bar ..." bind:value={q} on:blur={handleSearch} {disabled}>
+        <Textfield type="search" name="q" label="Stichwortsuche" placeholder="Restaurant, Bar ..." value={q} {disabled}>
             <button slot="right" class="bg-blue text-white h-full px-4 mx-0"><SearchIcon size="1x" /></button>
         </Textfield>
         <Select label="Postleitzahl" placeholder="-- Alle --" items={PLZ} bind:value={filter.plz} {disabled} />

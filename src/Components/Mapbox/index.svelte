@@ -8,15 +8,18 @@
 
     let container;
     let map;
+    let ready = false;
 
-    // automatically init/update map if data changes
-    $: if (map && map.isStyleLoaded() && data) {
-        if (map.getSource('data')) {
-            //update
+    // automatically update map if data changes
+    $: if (ready && data) {
             map.getSource('data').setData(data);
-        } else {
-            //init
+    }
 
+    function initMap() {
+        ready = map && map.isStyleLoaded();
+        if(!ready) {
+            setTimeout(initMap, 200);
+        } else {
             // attach data to map with key "data"
             map.addSource("data", {
                 type: "geojson",
@@ -83,6 +86,7 @@
             });
         }
     }
+    initMap();
 
     onMount(() => {
         mapboxgl.accessToken = process.env.MAPBOXGL_ACCESS_TOKEN;
@@ -132,8 +136,10 @@
 						<p class="mt-2">${data.strasse_nr}</p>
 						<p class="mb-2">${data.plz} Berlin</p>
 						${data.fon ? '<div><a href="tel:' + data.fon + '" target="_blank">' + data.fon + '</a></div>' : ''}
-						${data.fon ? '<div><a href="mailto:' + data.mail + '">' + data.mail + '</a></div>' : ''}
-						<div><a href="${data.w3}" target="_blank">Mehr...</a></div>
+						${data.mail ? '<div><a href="mailto:' + data.mail + '">' + data.mail + '</a></div>' : ''}
+						<div class="mt-2 flex justify-end">
+                            <a class="inline-block px-4 py-2 rounded bg-blue text-white no-underline" href="${data.w3}" target="_blank">Mehr...</a>
+                        </div>
 					</div>
 				`)
                     .addTo(map);

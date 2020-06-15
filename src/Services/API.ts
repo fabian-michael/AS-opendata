@@ -1,11 +1,11 @@
 import {objectToURLParams} from "@Utilities";
 
 //@ts-ignore
-const BaseUrl: string = `https://cors-anywhere.herokuapp.com/${process.env.API_URL}`;
+const BaseUrl: string = `${process.env.API_URL}`;
 
 export const API = {
-    async request(method: string, slug: string, params?: object, payload?: any) {
-        return new Promise(async (resolve, reject) => {
+    async request(method: string, slug: string, params?: object, payload?: any): Promise<Response> {
+        return new Promise<Response>(async (resolve, reject) => {
             const query = params ? `?${objectToURLParams(params).toString()}` : '';
 
             try {
@@ -19,7 +19,7 @@ export const API = {
                 });
 
                 if (response.status === 200) {
-                    return response.json().then(resolve);
+                    return resolve(response);
                 } else {
                     return reject(response);
                 }
@@ -29,11 +29,11 @@ export const API = {
         });
 	},
 	
-	async get(slug: string, params?: object, payload?: any) {
+	async get(slug: string, params?: object, payload?: any): Promise<Response> {
 		return this.request('GET', slug, params, payload);
 	},
 
-    async post(slug: string, params?: object, payload?: any) {
+    async post(slug: string, params?: object, payload?: any): Promise<Response> {
         return this.request('POST', slug, params, payload);
     }
 };

@@ -91,6 +91,9 @@
 .min-h-full {
   min-height: 100%;
 }
+.max-h-full {
+  max-height: 100%;
+}
 
 .w-full {
   width: 100%;
@@ -169,6 +172,10 @@ min-w-screen {
   flex: 1 1 auto;
 }
 
+.flex-shrink-0 {
+  flex-shrink: 0;
+}
+
 .flex-wrap {
   flex-wrap: wrap;
 }
@@ -183,6 +190,13 @@ min-w-screen {
 
 .self-stretch {
   align-self: stretch;
+}
+
+.justify-end {
+  justify-content: flex-end;
+}
+.justify-between {
+  justify-content: space-between;
 }
 // Spacings
 // -----------------------------------------------
@@ -332,6 +346,10 @@ min-w-screen {
   line-height: 2;
 }
 
+.no-underline {
+  text-decoration: none;
+}
+
 // Backgrounds
 // -----------------------------------------------
 
@@ -426,6 +444,16 @@ min-w-screen {
 
 .overflow-hidden {
   overflow: hidden;
+}
+.overflow-x-hidden {
+  overflow-x: hidden;
+}
+
+.overflow-auto {
+  overflow: auto;
+}
+.overflow-y-auto {
+  overflow-y: auto;
 }
 
 // Interactivity

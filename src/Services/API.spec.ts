@@ -2,21 +2,22 @@ import { API } from './API';
 
 describe('Http request tests', () => {
     test('200 test', async () => {
-        const result = await API.Request('GET', '/200');
-        expect(result.success).toEqual(true);
+        const result = await API.get('');
+        expect(result.ok).toEqual(true);
     });
 
     test('404 test', async () => {
         try {
-            await API.Request('GET', '/404');
+            await API.get('/some-not-existing-url');
         } catch (error) {
-            expect(error.status).toEqual(404);
+            expect(error.status).toBeGreaterThanOrEqual(400);
+            expect(error.status).toBeLessThan(500);
         }
     });
 
     test('Catch test', async () => {
         try {
-            await API.Request('GET', '');
+            await API.get('');
         } catch (error) {
             expect(error.code).toBeUndefined();
         }
