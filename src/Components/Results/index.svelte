@@ -1,5 +1,6 @@
 <script>
 	import Data from '@Stores/data.store';
+	import Loader from '@Components/Loader/index.svelte';
 	import Item from './Item';
 	import {FrownIcon} from 'svelte-feather-icons';
 	
@@ -10,22 +11,26 @@
 	
 </script>
 
-<ul class="flex flex-col results">
+<ul class="flex flex-col text-center results text-gray-darker">
 	{#if isSuccess}
-		<li class="text-center text-gray-darker">
+		<li>
 			{$Data.count} Ergebnisse
 		</li>
 		{#each $Data.data.features as element}
-            <li id="result_{element.properties.data.unique_id}" class="p-4 my-4 bg-white rounded shadow text-gray-dark">
+            <li id="result_{element.properties.data.unique_id}" class="p-4 my-4 text-left bg-white rounded shadow text-gray-dark">
 				<Item data={element.properties.data}/>
             </li>
 		{:else}
-			<li class="text-center text-gray-darker">
+			<li>
 				Keine Ergebnisse
 			</li>
 		{/each}
+	{:else if isLoading}
+		<li>
+			Lädt...
+		</li>
 	{:else if isError}
-		<li class="text-center text-red">
+		<li class="text-red">
 			<FrownIcon size="1x" /><br />
 			Ein Fehler ist aufgetreten
 		</li>

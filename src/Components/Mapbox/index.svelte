@@ -1,7 +1,7 @@
 <script>
     import {onMount, getContext} from "svelte";
     import mapboxgl from "mapbox-gl/dist/mapbox-gl";
-    import Item from '@Components/Results/Item';
+    import Item from '@Components/Results/Item.svelte';
 
     export let center = [];
     export let zoom = 1;

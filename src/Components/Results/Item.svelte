@@ -1,5 +1,5 @@
 <script>
-    import Button from '@Components/Button';
+    import Button from '@Components/Button/index.svelte';
     import {ExternalLinkIcon, CheckIcon, XIcon} from 'svelte-feather-icons';
 	export let data = {};
 </script>

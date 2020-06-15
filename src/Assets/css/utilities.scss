@@ -320,6 +320,9 @@ min-w-screen {
   font-size: 1rem;
 }
 
+.text-left {
+  text-align: left;
+}
 .text-center {
   text-align: center;
 }
@@ -398,6 +401,12 @@ min-w-screen {
   text-decoration: none;
 }
 
+.truncate {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap
+}
+
 // Backgrounds
 // -----------------------------------------------
 
@@ -438,6 +447,23 @@ min-w-screen {
 }
 .bg-blue-dark {
   background-color: $blue-dark;
+}
+
+// Green
+.bg-green-light {
+  background-color: $green-light;
+}
+.bg-green-lighter {
+  background-color: $green-lighter;
+}
+.bg-green {
+  background-color: $green;
+}
+.bg-green-darker {
+  background-color: $green-darker;
+}
+.bg-green-dark {
+  background-color: $green-dark;
 }
 
 // Border

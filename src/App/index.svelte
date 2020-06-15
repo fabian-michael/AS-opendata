@@ -35,15 +35,15 @@
 <script>
     import {fade} from 'svelte/transition';
     import {onMount, onDestroy, setContext} from 'svelte';
-    import Filter from "@Components/Filter";
-    import Mapbox from "@Components/Mapbox";
-    import Loader from "@Components/Loader";
-    import Results from "@Components/Results";
-    import Button from "@Components/Button";
-    import Drawer from "@Components/Drawer";
+    import Filter from "@Components/Filter/index.svelte";
+    import Mapbox from "@Components/Mapbox/index.svelte";
+    import Loader from "@Components/Loader/index.svelte";
+    import Results from "@Components/Results/index.svelte";
+    import Button from "@Components/Button/index.svelte";
+    import Drawer from "@Components/Drawer/index.svelte";
     import Data from '@Stores/data.store';
     import {objectToURLParams, URLParamsToObject} from "@Utilities";
-    import {ArrowLeftIcon, ArrowRightIcon, FilterIcon, Maximize2Icon, Minimize2Icon} from 'svelte-feather-icons';
+    import {ArrowLeftIcon, ArrowRightIcon, FilterIcon, Maximize2Icon, Minimize2Icon, XIcon} from 'svelte-feather-icons';
 
 
     // coordinates of berlin to initialize map
@@ -126,16 +126,38 @@
 
                 <span>© Fabian Michael</span>
             </div>
+
             <div class="flex flex-col h-full">
+
                 <div class="flex justify-between flex-shrink-0 p-4">
                     <Button icon={ArrowLeftIcon}
                             on:click={() => swiper.style.transform = 'translateX(0)'} small/>
                     <Button class="toggle-full-size" icon={fullSizeDrawer ? Minimize2Icon : Maximize2Icon}
                             on:click={() => fullSizeDrawer = !fullSizeDrawer} small/>
                 </div>
+
                 <div class="flex-auto w-full px-8 py-4 overflow-x-hidden overflow-y-auto bg-gray-light" bind:this={resultsContainer}>
+					<ul class="flex flex-wrap -mx-2">
+						{#if filter.q}
+							<li class="p-2 m-2 leading-none text-white truncate rounded bg-green max-w-38">
+								<button class="p-0 m-0" on:click={() => filter.q = ''}><XIcon size="1x" /></button> {filter.q}
+							</li>
+						{/if}
+						{#if filter.plz}
+							<li class="p-2 m-2 leading-none text-white truncate rounded bg-green max-w-38">
+								<button class="p-0 m-0" on:click={() => filter.plz = null}><XIcon size="1x" /></button> {filter.plz}
+							</li>
+						{/if}
+						{#if filter.art}
+							<li class="p-2 m-2 leading-none text-white truncate rounded bg-green max-w-38">
+								<button class="p-0 m-0" on:click={() => filter.art = null}><XIcon size="1x" /></button> {filter.art}
+							</li>
+						{/if}
+					</ul>
+
                     <Results/>
                 </div>
+
             </div>
             
         </div>

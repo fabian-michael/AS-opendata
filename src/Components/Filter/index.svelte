@@ -1,7 +1,7 @@
 <script>
-    import Textfield from '@Components/Textfield';
-    import Select from '@Components/Select';
-    import Button from '@Components/Button';
+    import Textfield from '@Components/Textfield/index.svelte';
+    import Select from '@Components/Select/index.svelte';
+    import Button from '@Components/Button/index.svelte';
     import {createEventDispatcher} from 'svelte';
     import {SearchIcon} from 'svelte-feather-icons';
 

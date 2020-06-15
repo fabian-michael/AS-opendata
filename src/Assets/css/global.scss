@@ -4,13 +4,13 @@
 *,
 *::before,
 *::after {
-  box-sizing: border-box;
+	box-sizing: border-box;
 }
 
 //  Remove default padding 
 ul,
 ol {
-  padding: 0;
+	padding: 0;
 }
 
 //  Remove default margin 
@@ -28,31 +28,31 @@ figcaption,
 blockquote,
 dl,
 dd {
-  margin: 0;
+	margin: 0;
 }
 
 //  Set core body defaults 
 body {
-  scroll-behavior: smooth;
-  text-rendering: optimizeSpeed;
-  line-height: 1.5;
-  font-family: 'Open Sans', sans-serif;
-  color: $gray-dark;
-  display: flex;
-  flex-direction: column;
-  height: calc(var(--vh, 1vh) * 100); // fix height on mobile
+	scroll-behavior: smooth;
+	text-rendering: optimizeSpeed;
+	line-height: 1.5;
+	font-family: 'Open Sans', sans-serif;
+	color: $gray-dark;
+	display: flex;
+	flex-direction: column;
+	height: calc(var(--vh, 1vh) * 100); // fix height on mobile
 }
 
 //  Remove list styles on ul, ol elements
 ul,
 ol {
-  list-style: none;
+	list-style: none;
 }
 
 //  Make images easier to work with 
 img {
-  max-width: 100%;
-  display: block;
+	max-width: 100%;
+	display: block;
 }
 
 //  reset inputs and buttons
@@ -60,18 +60,18 @@ input,
 button,
 textarea,
 select {
-  font: inherit;
-  border: none;
-  appearance: none;
+	font: inherit;
+	border: none;
+	appearance: none;
 
-  &:focus {
-    outline: none;
-  }
+	&:focus {
+	outline: none;
+	}
 }
 
 // hide -webkit-search-decoration on safari
 input[type="search"]::-webkit-search-decoration {
-  display: none;
+	display: none;
 }
 
 
@@ -79,23 +79,26 @@ button,
 input[type="button"],
 input[type="submit"]
 {
-  cursor: pointer;
+	appearance: none;
+	background-color: transparent;
+	cursor: pointer;
+	color: inherit;
 }
 
 //  Remove all animations and transitions for people that prefer not to see them
 @media (prefers-reduced-motion: reduce) {
-  * {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
-  }
+	* {
+	animation-duration: 0.01ms !important;
+	animation-iteration-count: 1 !important;
+	transition-duration: 0.01ms !important;
+	scroll-behavior: auto !important;
+	}
 }
 
 label {
-  cursor: pointer;
+	cursor: pointer;
 }
 
 a {
-  color: $blue;
+	color: $blue;
 }
