@@ -76,7 +76,7 @@
 	export let disabled = false;
     export let value = '';
 
-    const klass = 'block w-full p-2 flex-auto';
+    const klass = 'block w-full p-2 m-0 flex-auto text-base';
 
     // if prop type has an invalid value set it to "text"
     $: !types.includes(type) ? type = 'text' : null;
@@ -88,7 +88,7 @@
             {label}
         </label>
     {/if}
-    <div class="input rounded shadow mt-2 mb-4 overflow-hidden flex" >
+    <div class="flex mt-2 mb-4 overflow-hidden rounded shadow input" >
 
         <!-- cannot set type={type} because svelte does not allow that -->
         {#if type === 'text'}
@@ -165,7 +165,7 @@
                       on:keyup
             ></textarea>
         {/if}
-        <div class="">
+        <div class="relative z-10">
             <slot name="right" />
         </div>
     </div>

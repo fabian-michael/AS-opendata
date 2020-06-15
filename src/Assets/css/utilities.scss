@@ -228,6 +228,33 @@ min-w-screen {
     margin-bottom: #{$i/4}rem;
   }
 
+  // negative margin
+  .-m-#{$i} {
+    margin: -#{$i/4}rem;
+  }
+
+  .-mt-#{$i} {
+    margin-top: -#{$i/4}rem;
+  }
+  .-mr-#{$i} {
+    margin-right: -#{$i/4}rem;
+  }
+  .-mb-#{$i} {
+    margin-bottom: -#{$i/4}rem;
+  }
+  .-ml-#{$i} {
+    margin-left: -#{$i/4}rem;
+  }
+
+  .-mx-#{$i} {
+    margin-left: -#{$i/4}rem;
+    margin-right: -#{$i/4}rem;
+  }
+  .-my-#{$i} {
+    margin-top: -#{$i/4}rem;
+    margin-bottom: -#{$i/4}rem;
+  }
+
   // padding
   .p-#{$i} {
     padding: #{$i/4}rem;

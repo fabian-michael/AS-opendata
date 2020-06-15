@@ -60,7 +60,7 @@
 
 
 
-<div class="select relative" class:disabled>
+<div class="relative select" class:disabled>
     {#if label}
         <label class="block font-bold"
                id="label_{id}"
@@ -70,7 +70,7 @@
         </label>
     {/if}
 
-    <div class="wrapper mt-2 mb-4 rounded shadow bg-gray-light text-gray-dark cursor-pointer overflow-hidden">
+    <div class="relative mt-2 mb-4 overflow-hidden rounded shadow cursor-pointer wrapper bg-gray-light text-gray-dark">
         <select class="block w-full p-2"
                 id="select_{id}"
                 {name}
@@ -83,5 +83,6 @@
                 </option>
             {/each}
         </select>
+        
     </div>
 </div>

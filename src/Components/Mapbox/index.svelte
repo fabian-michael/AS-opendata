@@ -1,6 +1,7 @@
 <script>
     import {onMount} from "svelte";
     import mapboxgl from "mapbox-gl/dist/mapbox-gl";
+    import Item from '@Components/Results/Item';
 
     export let center = [];
     export let zoom = 1;
@@ -125,24 +126,18 @@
             let data = JSON.parse(properties.data);
 
             // create the popup
+            const placeholder = document.createElement('div');
+            placeholder.classList.add('pt-4');
+            new Item({
+                target: placeholder,
+                props: {
+                    data
+                }
+            });
             new mapboxgl.Popup()
-                    .setLngLat(coordinates)
-                    .setHTML(`
-					<div class="p-4">
-						<p class="text-base"><strong>${data.name}</strong></p>
-						<p class="mb-2">${data.angebot}</p>
-						<p>Selbstabholen: ${data.selbstabholung === 'WAHR' ? 'Ja' : 'Nein'}</p>
-						<p>Lieferung: ${data.lieferung === 'WAHR' ? 'Ja' : 'Nein'}</p>
-						<p class="mt-2">${data.strasse_nr}</p>
-						<p class="mb-2">${data.plz} Berlin</p>
-						${data.fon ? '<div><a href="tel:' + data.fon + '" target="_blank">' + data.fon + '</a></div>' : ''}
-						${data.mail ? '<div><a href="mailto:' + data.mail + '">' + data.mail + '</a></div>' : ''}
-						<div class="mt-2 flex justify-end">
-                            <a class="inline-block px-4 py-2 rounded bg-blue text-white no-underline" href="${data.w3}" target="_blank">Mehr...</a>
-                        </div>
-					</div>
-				`)
-                    .addTo(map);
+                .setLngLat(coordinates)
+                .setDOMContent(placeholder)
+                .addTo(map);
         });
     });
 </script>

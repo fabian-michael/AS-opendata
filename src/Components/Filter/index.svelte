@@ -230,7 +230,7 @@
     <form bind:this={form} on:submit|preventDefault={handleSearch}>
         <Textfield type="search" name="q" label="Stichwortsuche" placeholder="Restaurant, Bar ..." value={q} {disabled}>
             <div slot="right">
-                <Button class="m-0"  icon={SearchIcon} />
+                <Button class="m-0 h-10 w-10" icon={SearchIcon} rounded={false} small />
             </div>
         </Textfield>
         <Select label="Postleitzahl" placeholder="-- Alle --" items={PLZ} bind:value={filter.plz} {disabled} />
