@@ -1,0 +1,16 @@
+{
+	"compilerOptions": {
+	  "target": "es2018",
+	  "allowSyntheticDefaultImports": false,
+	  "baseUrl": "./",
+	  "paths": {
+		"@Components/*": ["src/Components/*"],
+		"@Services/*": ["src/Services/*"],
+		"@Assets/*": ["src/Assets/*"],
+		"@Utilities/*": ["src/Utilities/*"],  
+		"@Stores/*": ["src/Stores/*"],  
+		"@Types/*": ["src/Types/*"]
+	  }
+	},
+	"exclude": ["node_modules", "public"]
+  }
