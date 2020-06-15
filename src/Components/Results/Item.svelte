@@ -13,7 +13,7 @@
 	    {data.angebot}
     </p>
 
-	<div class="mt-2 flex">
+	<div class="flex mt-2">
 	    <p class="flex-auto">
 		    <strong>Abholen</strong><br />
 		    {data.selbstabholung === 'WAHR' ? 'Ja' : 'Nein'}
@@ -47,7 +47,7 @@
 	    </p>
 
 	{#if data.w3}
-        <div class="mt-4 flex justify-end">
+        <div class="flex justify-end mt-4">
             <Button href="{data.w3}" text="Webseite" icon={ExternalLinkIcon} target="_blank" />
         </div>
 	{/if}

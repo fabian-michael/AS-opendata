@@ -34,7 +34,7 @@
 
 <script>
     import {fade} from 'svelte/transition';
-    import {onMount, onDestroy} from 'svelte';
+    import {onMount, onDestroy, setContext} from 'svelte';
     import Filter from "@Components/Filter";
     import Mapbox from "@Components/Mapbox";
     import Loader from "@Components/Loader";
@@ -54,7 +54,13 @@
     let fullSizeDrawer = false;
     let swiper;
     let filter = applyURLParamsToFilter();
-    let doPushState = false;
+	let doPushState = false;
+	let resultsContainer;
+	setContext('resultsContainer', {
+		get: () => resultsContainer
+	});
+	
+	$: isLoading = $Data.state.loading;
 
     // merge default filter with URL params
     function applyURLParamsToFilter() {
@@ -83,8 +89,6 @@
         doPushState = false;
     }
 
-
-
     // mobile height fix see global.css
     function updateAppHeight() {
         // get the viewport height and multiple it by 1% to get a value for a vh unit
@@ -105,17 +109,17 @@
     })
 </script>
 
-<main class="relative flex overflow-hidden full">
+<main class="fixed flex overflow-hidden full">
     <Drawer bind:show={showDrawer} bind:fullSize={fullSizeDrawer}>
         <div class="flex h-full swiper" bind:this={swiper}
              on:swipeleft|stopPropagation|preventDefault={() => swiper.style.transform = 'translateX(-50%)'}
              on:swiperight|stopPropagation|preventDefault={() => swiper.style.transform = 'translateX(0)'} >
 
             <div class="p-4">
-                <Filter disabled={$Data.loading} on:filter={handleFilter} bind:filter/>
+                <Filter disabled={isLoading} on:filter={handleFilter} bind:filter/>
 
                 <div class="flex justify-end py-4">
-                    <Button text="{$Data.data.features ? $Data.data.features.length : 0} Ergebnisse"
+                    <Button text="{$Data.count} Ergebnisse"
                             icon={ArrowRightIcon}
                             on:click={() => swiper.style.transform = 'translateX(-50%)'}/>
                 </div>
@@ -129,7 +133,7 @@
                     <Button class="toggle-full-size" icon={fullSizeDrawer ? Minimize2Icon : Maximize2Icon}
                             on:click={() => fullSizeDrawer = !fullSizeDrawer} small/>
                 </div>
-                <div class="flex-auto w-full px-8 py-4 overflow-x-hidden overflow-y-auto bg-gray-light">
+                <div class="flex-auto w-full px-8 py-4 overflow-x-hidden overflow-y-auto bg-gray-light" bind:this={resultsContainer}>
                     <Results/>
                 </div>
             </div>
@@ -141,7 +145,7 @@
         <Mapbox center={[BERLIN_LON, BERLIN_LAT]} zoom={9} data={$Data.data}/>
     </div>
 
-	{#if $Data.loading}
+	{#if isLoading}
         <div class="absolute top-0 bottom-0 left-0 right-0 z-50 flex items-center justify-center loading full"
              transition:fade={{duration: 200}}>
             <Loader color="white"/>

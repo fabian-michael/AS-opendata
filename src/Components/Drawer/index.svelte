@@ -18,12 +18,12 @@
     }
 </script>
 
-<div class="z-10 flex flex-col drawer full bg-gray-dark text-gray-lighter" class:open={show}
+<div class="absolute bottom-0 left-0 z-10 flex flex-col drawer full bg-gray-dark text-gray-lighter max-h-104" class:open={show}
      class:full-size={fullSize}
      on:swipeup|stopPropagation|preventDefault={handleSwipeUp}
      on:swipedown|stopPropagation|preventDefault={handleSwipeDown}>
 
-    <button class="absolute top-0 left-0 block w-full toggle bg-gray-dark text-gray-light"
+    <button class="absolute top-0 left-0 block w-full h-8 p-0 toggle bg-gray-dark text-gray-light"
             on:click={() => (show = !show)}></button>
 
 	<div class="flex-auto h-full overflow-hidden">
@@ -37,12 +37,8 @@
 
     .drawer {
         transition: all 300ms;
-        position: absolute;
-        bottom: 0;
-        left: 0;
         transform: translateY(100%);
         touch-action: none;
-        max-height: 26rem;
 
         &.open {
             transform: translateY(0);
@@ -50,7 +46,6 @@
 
         &.full-size {
             max-height: 100%;
-            height: 100%
         }
 
         @include lg {
@@ -63,11 +58,12 @@
 
     .toggle {
         transform: translateY(-100%);
-        height: 2em;
         touch-action: none;
 
         &:before,
         &:after {
+			--rotation: 0;
+
             content: "";
             display: block;
             width: 1.5em;
@@ -76,25 +72,26 @@
             position: absolute;
             top: calc(50% - 0.216666666666667em);
             transition: transform 0.3s;
-            border-radius: 9999px;
+			border-radius: 9999px;
+			transform: translateX(-50%) rotate(var(--rotation));
         }
 
         &:before {
-            transform: rotate(-15deg);
+			--rotation: -15deg;
             left: calc(50% - 0.65em);
         }
 
         &:after {
-            transform: rotate(15deg);
+            --rotation: 15deg;
             left: calc(50% + 0.65em);
         }
 
         .open &:before {
-            transform: rotate(15deg);
+			--rotation: 15deg;
         }
 
         .open &:after {
-            transform: rotate(-15deg);
+			--rotation: -15deg;
         }
     }
 </style>

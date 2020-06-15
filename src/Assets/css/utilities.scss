@@ -56,6 +56,10 @@
   position: absolute;
 }
 
+.fixed {
+  position: fixed;
+}
+
 .top-0 {
   top: 0;
 }
@@ -356,6 +360,23 @@ min-w-screen {
 }
 .text-blue-dark {
   color: $blue-dark;
+}
+
+// red
+.text-red-light {
+  color: $red-light;
+}
+.text-red-lighter {
+  color: $red-lighter;
+}
+.text-red {
+  color: $red;
+}
+.text-red-darker {
+  color: $red-darker;
+}
+.text-red-dark {
+  color: $red-dark;
 }
 
 // White

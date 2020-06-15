@@ -1,5 +1,5 @@
 <script>
-    import {onMount} from "svelte";
+    import {onMount, getContext} from "svelte";
     import mapboxgl from "mapbox-gl/dist/mapbox-gl";
     import Item from '@Components/Results/Item';
 
@@ -9,7 +9,10 @@
 
     let container;
     let map;
-    let ready = false;
+	let ready = false;
+	let resultsContainer; 
+	$: console.log(resultsContainer);
+	
 
     // automatically update map if data changes
     $: if (ready && data) {
@@ -90,6 +93,8 @@
     initMap();
 
     onMount(() => {
+		resultsContainer = getContext('resultsContainer').get();
+		
         mapboxgl.accessToken = process.env.MAPBOXGL_ACCESS_TOKEN;
         map = new mapboxgl.Map({
             container,
@@ -125,7 +130,7 @@
 
             let data = JSON.parse(properties.data);
 
-            // create the popup
+            // render popup component
             const placeholder = document.createElement('div');
             placeholder.classList.add('pt-4');
             new Item({
@@ -134,10 +139,18 @@
                     data
                 }
             });
+
+            // create the popup
             new mapboxgl.Popup()
                 .setLngLat(coordinates)
                 .setDOMContent(placeholder)
-                .addTo(map);
+				.addTo(map);
+				
+			// scroll resultsContainer to clicked element
+			let anchor = resultsContainer.querySelector(`#result_${data.unique_id}`);
+			let rectResultsContainer = resultsContainer.getBoundingClientRect();
+			let rectAnchor = anchor.getBoundingClientRect();
+			resultsContainer.scrollTop = resultsContainer.scrollTop + (rectAnchor.top - rectResultsContainer.top);
         });
     });
 </script>
