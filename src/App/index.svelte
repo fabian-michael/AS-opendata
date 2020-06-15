@@ -30,7 +30,7 @@
 
         @include lg {
             position: static;
-            max-width: 24em;
+            max-width: 28em;
             transform: translateY(0) !important;
             max-height: none;
         }
@@ -80,6 +80,7 @@
     .swiper {
         width: 200%;
         transition: transform 300ms;
+
         > * {
             width: 50%;
         }
@@ -143,14 +144,14 @@
     }
 
     function handleSwipeUp() {
-        if(showDrawer) {
+        if (showDrawer) {
             fullSize = true
         }
         showDrawer = true
     }
 
     function handleSwipeDown() {
-        if(fullSize) {
+        if (fullSize) {
             fullSize = false
         } else {
             showDrawer = false
@@ -178,12 +179,13 @@
 </script>
 
 <main class="full overflow-hidden flex relative">
-    <div class="drawer full bg-gray-dark text-gray-lighter flex flex-col z-10" class:open={showDrawer} class:full-size={fullSize}
+    <div class="drawer full bg-gray-dark text-gray-lighter flex flex-col z-10" class:open={showDrawer}
+         class:full-size={fullSize}
          on:swipeup|stopPropagation|preventDefault={handleSwipeUp}
-         on:swipedown|stopPropagation|preventDefault={handleSwipeDown} >
+         on:swipedown|stopPropagation|preventDefault={handleSwipeDown}>
 
         <button class="toggle absolute block w-full top-0 left-0 bg-gray-dark text-gray-light"
-                on:click={() => (showDrawer = !showDrawer)} />
+                on:click={() => (showDrawer = !showDrawer)}/>
 
         <div class="flex-auto h-full overflow-hidden">
             <div class="swiper flex h-full" bind:this={swiper}
@@ -193,8 +195,9 @@
                     <Filter disabled={$Data.loading} on:filter={handleFilter} bind:filter/>
 
                     <div class="flex justify-end py-4">
-                        <Button text="{$Data.data.features ? $Data.data.features.length : 0} Ergebnisse" icon={ArrowRightIcon}
-                                on:click={() => swiper.style.transform = 'translateX(-50%)'} />
+                        <Button text="{$Data.data.features ? $Data.data.features.length : 0} Ergebnisse"
+                                icon={ArrowRightIcon}
+                                on:click={() => swiper.style.transform = 'translateX(-50%)'}/>
                     </div>
 
                     <span>© Fabian Michael</span>
@@ -202,12 +205,12 @@
                 <div class="flex flex-col h-full">
                     <div class="p-4 flex justify-between flex-shrink-0">
                         <Button icon={ArrowLeftIcon}
-                                on:click={() => swiper.style.transform = 'translateX(0)'} />
+                                on:click={() => swiper.style.transform = 'translateX(0)'}/>
                         <Button class="toggle-full-size" icon={fullSize ? Minimize2Icon : Maximize2Icon}
-                                on:click={() => fullSize = !fullSize} />
+                                on:click={() => fullSize = !fullSize}/>
                     </div>
                     <div class="flex-auto w-full overflow-x-hidden overflow-y-auto px-8 py-4 bg-gray-light">
-                        <Results />
+                        <Results/>
                     </div>
                 </div>
             </div>
@@ -219,10 +222,10 @@
         <Mapbox center={[BERLIN_LON, BERLIN_LAT]} zoom={9} data={$Data.data}/>
     </div>
 
-    {#if $Data.loading}
+	{#if $Data.loading}
         <div class="loading absolute full top-0 right-0 bottom-0 left-0 flex items-center justify-center z-50"
              transition:fade={{duration: 200}}>
             <Loader color="white"/>
         </div>
-    {/if}
+	{/if}
 </main>
