@@ -157,69 +157,72 @@
         }
     }
 
-    onMount(() => {
-        window.addEventListener('popstate', handlePopstate);
-
-        // mobile height fix see global.css
+    // mobile height fix see global.css
+    function updateAppHeight() {
         // get the viewport height and multiple it by 1% to get a value for a vh unit
         let vh = window.innerHeight * 0.01;
         // set the value in the --vh custom property to the root of the document
         document.documentElement.style.setProperty('--vh', `${vh}px`);
+    }
+
+    onMount(() => {
+        window.addEventListener('popstate', handlePopstate);
+        window.addEventListener('resize', updateAppHeight);
+        updateAppHeight();
     })
 
     onDestroy(() => {
         window.removeEventListener('popstate', handlePopstate);
+        window.removeEventListener('resize', updateAppHeight);
     })
 </script>
 
-<main class="container flex-auto flex p-4 ">
-    <div class="wrapper w-full shadow-xl overflow-hidden flex relative">
-        <div class="drawer w-full h-full bg-gray-dark text-gray-lighter flex flex-col z-10" class:open={showDrawer} class:full-size={fullSize}
-             on:swipeup|stopPropagation|preventDefault={handleSwipeUp}
-             on:swipedown|stopPropagation|preventDefault={handleSwipeDown}
-        >
-            <button class="toggle absolute block w-full top-0 left-0 bg-gray-dark
-					text-gray-light"
-                    on:click={() => (showDrawer = !showDrawer)}
-                    ></button>
-            <div class="flex-auto h-full overflow-hidden">
-                <div class="swiper flex h-full" bind:this={swiper}
-                     on:swipeleft|stopPropagation|preventDefault={() => swiper.style.transform = 'translateX(-50%)'}
-                     on:swiperight|stopPropagation|preventDefault={() => swiper.style.transform = 'translateX(0)'}
-                >
-                    <div class="p-4 ">
-                        <Filter disabled={$Data.loading} on:filter={handleFilter} bind:filter/>
+<main class="full overflow-hidden flex relative">
+    <div class="drawer full bg-gray-dark text-gray-lighter flex flex-col z-10" class:open={showDrawer} class:full-size={fullSize}
+         on:swipeup|stopPropagation|preventDefault={handleSwipeUp}
+         on:swipedown|stopPropagation|preventDefault={handleSwipeDown} >
 
-                        <div class="flex justify-end py-4">
-                            <Button text="{$Data.data.features ? $Data.data.features.length : 0} Ergebnisse" icon={ArrowRightIcon}
-                                    on:click={() => swiper.style.transform = 'translateX(-50%)'} />
-                        </div>
+        <button class="toggle absolute block w-full top-0 left-0 bg-gray-dark text-gray-light"
+                on:click={() => (showDrawer = !showDrawer)} />
 
-                        <span>© Fabian Michael</span>
+        <div class="flex-auto h-full overflow-hidden">
+            <div class="swiper flex h-full" bind:this={swiper}
+                 on:swipeleft|stopPropagation|preventDefault={() => swiper.style.transform = 'translateX(-50%)'}
+                 on:swiperight|stopPropagation|preventDefault={() => swiper.style.transform = 'translateX(0)'} >
+                <div class="p-4 ">
+                    <Filter disabled={$Data.loading} on:filter={handleFilter} bind:filter/>
+
+                    <div class="flex justify-end py-4">
+                        <Button text="{$Data.data.features ? $Data.data.features.length : 0} Ergebnisse" icon={ArrowRightIcon}
+                                on:click={() => swiper.style.transform = 'translateX(-50%)'} />
                     </div>
-                    <div class="flex flex-col h-full">
-                        <div class="p-4 flex justify-between flex-shrink-0">
-                            <Button icon={ArrowLeftIcon}
-                                    on:click={() => swiper.style.transform = 'translateX(0)'} />
-                            <Button class="toggle-full-size" icon={fullSize ? Minimize2Icon : Maximize2Icon}
-                                    on:click={() => fullSize = !fullSize} />
-                        </div>
-                        <div class="flex-auto overflow-x-hidden overflow-y-auto p-8 bg-gray-light">
-                            <Results />
-                        </div>
+
+                    <span>© Fabian Michael</span>
+                </div>
+                <div class="flex flex-col h-full">
+                    <div class="p-4 flex justify-between flex-shrink-0">
+                        <Button icon={ArrowLeftIcon}
+                                on:click={() => swiper.style.transform = 'translateX(0)'} />
+                        <Button class="toggle-full-size" icon={fullSize ? Minimize2Icon : Maximize2Icon}
+                                on:click={() => fullSize = !fullSize} />
+                    </div>
+                    <div class="flex-auto w-full overflow-x-hidden overflow-y-auto px-8 bg-gray-light">
+                        <Results />
                     </div>
                 </div>
+            </div>
+        </div>
 
-            </div>
-        </div>
-        <div class="mapbox flex-auto z-0">
-            <Mapbox center={[BERLIN_LON, BERLIN_LAT]} zoom={9} data={$Data.data}/>
-        </div>
-		{#if $Data.loading}
-            <div class="loading absolute full top-0 right-0 bottom-0 left-0 flex items-center justify-center z-50"
-                 transition:fade={{duration: 200}}>
-                <Loader color="white"/>
-            </div>
-		{/if}
     </div>
+
+    <div class="mapbox flex-auto z-0">
+        <Mapbox center={[BERLIN_LON, BERLIN_LAT]} zoom={9} data={$Data.data}/>
+    </div>
+
+    {#if $Data.loading}
+        <div class="loading absolute full top-0 right-0 bottom-0 left-0 flex items-center justify-center z-50"
+             transition:fade={{duration: 200}}>
+            <Loader color="white"/>
+        </div>
+    {/if}
 </main>

@@ -4,10 +4,10 @@
     import Button from '@Components/Button';
 </script>
 
-<ul class="results">
+<ul class="results flex flex-col">
 	{#if $Data.data.features}
 		{#each $Data.data.features as element}
-			<li class="rounded-lg bg-white shadow p-4 text-gray-dark">
+			<li class="rounded bg-white shadow p-4 my-4 text-gray-dark">
                 <p class="text-base"><strong>{element.properties.data.name}</strong></p>
                 <p class="mb-2">{element.properties.data.angebot}</p>
                 <p>Selbstabholen: {element.properties.data.selbstabholung === 'WAHR' ? 'Ja' : 'Nein'}</p>
@@ -27,15 +27,3 @@
 		{/each}
 	{/if}
 </ul>
-
-<style lang="scss">
-    @use '../../Assets/css/dev/breakpoints' as *;
-
-	.results {
-		display: grid;
-		grid-gap: 2rem;
-
-        @include lg {
-        }
-	}
-</style>

@@ -33,7 +33,6 @@ dd {
 
 //  Set core body defaults 
 body {
-  min-height: 100vh;
   scroll-behavior: smooth;
   text-rendering: optimizeSpeed;
   line-height: 1.5;
@@ -41,7 +40,7 @@ body {
   color: $gray-dark;
   display: flex;
   flex-direction: column;
-  max-height: calc(var(--vh, 1vh) * 100); // fix height on mobile
+  height: calc(var(--vh, 1vh) * 100); // fix height on mobile
 }
 
 //  Remove list styles on ul, ol elements
@@ -95,4 +94,8 @@ input[type="submit"]
 
 label {
   cursor: pointer;
+}
+
+a {
+  color: $blue;
 }
