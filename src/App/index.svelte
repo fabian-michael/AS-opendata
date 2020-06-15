@@ -206,7 +206,7 @@
                         <Button class="toggle-full-size" icon={fullSize ? Minimize2Icon : Maximize2Icon}
                                 on:click={() => fullSize = !fullSize} />
                     </div>
-                    <div class="flex-auto w-full overflow-x-hidden overflow-y-auto px-8 bg-gray-light">
+                    <div class="flex-auto w-full overflow-x-hidden overflow-y-auto px-8 py-4 bg-gray-light">
                         <Results />
                     </div>
                 </div>
