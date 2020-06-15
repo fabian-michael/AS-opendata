@@ -1,6 +1,7 @@
 <script>
     import Textfield from '@Components/Textfield';
     import Select from '@Components/Select';
+    import Button from '@Components/Button';
     import {createEventDispatcher} from 'svelte';
     import {SearchIcon} from 'svelte-feather-icons';
 
@@ -228,7 +229,9 @@
 <div class="filter">
     <form bind:this={form} on:submit|preventDefault={handleSearch}>
         <Textfield type="search" name="q" label="Stichwortsuche" placeholder="Restaurant, Bar ..." value={q} {disabled}>
-            <button slot="right" class="bg-blue text-white h-full px-4 mx-0"><SearchIcon size="1x" /></button>
+            <div slot="right">
+                <Button class="m-0"  icon={SearchIcon} />
+            </div>
         </Textfield>
         <Select label="Postleitzahl" placeholder="-- Alle --" items={PLZ} bind:value={filter.plz} {disabled} />
         <Select label="Art" placeholder="-- Alle --" items={CATEGORIES} bind:value={filter.art} {disabled} />

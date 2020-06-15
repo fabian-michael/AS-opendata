@@ -15,7 +15,7 @@
 
 {#if typeof href === 'string'}
 
-    <a {href} on:click class="inline-block p-4 rounded text-white no-underline bg-{colors[color] || 'blue'} {customClass}" {target}>
+    <a {href} on:click class="inline-block p-4 rounded text-white no-underline leading-none bg-{colors[color] || 'blue'} {customClass}" {target}>
 		{text}
 		{#if icon}
             <svelte:component this={icon} size="1x" />
@@ -24,7 +24,7 @@
 
 {:else}
 
-    <button on:click class="p-4 rounded text-white bg-{colors[color] || 'blue'} {customClass}">
+    <button on:click class="p-4 rounded text-white leading-none bg-{colors[color] || 'blue'} {customClass}">
 		{text}
 		{#if icon}
             <svelte:component this={icon} size="1x" />

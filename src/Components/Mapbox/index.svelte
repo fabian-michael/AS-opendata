@@ -4,7 +4,7 @@
 
     export let center = [];
     export let zoom = 1;
-    export let data = undefined;
+    export let data = {};
 
     let container;
     let map;
