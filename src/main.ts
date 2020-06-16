@@ -1,5 +1,7 @@
 import 'core-js/stable';
 import 'regenerator-runtime/runtime';
+import smoothscroll from 'smoothscroll-polyfill';
+smoothscroll.polyfill();
 
 import App from './App/index.svelte';
 import '@Assets/css';

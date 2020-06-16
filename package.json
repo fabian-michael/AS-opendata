@@ -67,6 +67,7 @@
     "isomorphic-fetch": "^2.2.1",
     "mapbox-gl": "next",
     "regenerator-runtime": "^0.13.5",
+    "smoothscroll-polyfill": "^0.4.4",
     "uid": "^1.0.0"
   }
 }

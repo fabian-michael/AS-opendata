@@ -5,19 +5,24 @@
 
     export let center = [];
     export let zoom = 1;
-    export let data = {};
+	export let data = {};
+	export let flyTo = null;
 
     let container;
     let map;
 	let ready = false;
 	let resultsContainer; 
-	$: console.log(resultsContainer);
-	
 
     // automatically update map if data changes
     $: if (ready && data) {
             map.getSource('data').setData(data);
-    }
+	};
+	
+	$: if(flyTo) {
+		console.log(flyTo);
+		
+		map.flyTo({center: flyTo, zoom: 18});
+	};
 
     function initMap() {
         ready = map && map.isStyleLoaded();
@@ -150,7 +155,8 @@
 			let anchor = resultsContainer.querySelector(`#result_${data.unique_id}`);
 			let rectResultsContainer = resultsContainer.getBoundingClientRect();
 			let rectAnchor = anchor.getBoundingClientRect();
-			resultsContainer.scrollTop = resultsContainer.scrollTop + (rectAnchor.top - rectResultsContainer.top);
+			let scrollTop = resultsContainer.scrollTop + (rectAnchor.top - rectResultsContainer.top) - 32;
+			resultsContainer.scroll({ top: scrollTop, behavior: 'smooth' });
         });
     });
 </script>

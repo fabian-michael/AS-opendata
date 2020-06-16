@@ -7,6 +7,7 @@
 	$: isLoading = $Data.state.loading;
 	$: isSuccess = $Data.state.success;
 	$: isError = $Data.state.error;
+	
 	$: console.log($Data.data.features);
 	
 </script>
@@ -18,7 +19,7 @@
 		</li>
 		{#each $Data.data.features as element}
             <li id="result_{element.properties.data.unique_id}" class="p-4 my-4 text-left bg-white rounded shadow text-gray-dark">
-				<Item data={element.properties.data}/>
+				<Item data={element.properties.data} coordinates={element.geometry.coordinates} isListItem on:btnFlyTo />
             </li>
 		{:else}
 			<li>

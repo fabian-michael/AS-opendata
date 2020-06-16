@@ -1,7 +1,7 @@
 <script>
-    import Textfield from '@Components/Textfield/index.svelte';
-    import Select from '@Components/Select/index.svelte';
-    import Button from '@Components/Button/index.svelte';
+    import Textfield from '@Components/Textfield';
+    import Select from '@Components/Select';
+    import Button from '@Components/Button';
     import {createEventDispatcher} from 'svelte';
     import {SearchIcon} from 'svelte-feather-icons';
 
@@ -209,7 +209,6 @@
     };
 
     let form;
-    let q;
     $: q = filter.q;
 
     // automatically dispatch "filter" event with filter attached on change

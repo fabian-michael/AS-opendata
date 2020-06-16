@@ -11,6 +11,7 @@
 
 	const colors = {
 		blue: 'blue',
+		green: 'green',
 		// ...
 	}
 </script>

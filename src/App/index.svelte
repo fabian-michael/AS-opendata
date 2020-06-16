@@ -1,37 +1,3 @@
-<style lang="scss">
-    @use '../Assets/css/dev/breakpoints' as *;
-    @use '../Assets/css/dev/variables' as *;
-
-    .mapbox {
-        padding-bottom: 2em;
-
-        @include lg {
-            padding-bottom: 0;
-        }
-    }
-
-
-
-    .loading {
-        background: rgba(0, 0, 0, 0.5);
-    }
-
-    .swiper {
-        width: 200%;
-        transition: transform 300ms;
-
-        > * {
-            width: 50%;
-        }
-    }
-
-    :global(.toggle-full-size) {
-        @include lg {
-            display: none !important;
-        }
-    }
-</style>
-
 <script>
     import {fade} from 'svelte/transition';
     import {onMount, onDestroy, setContext} from 'svelte';
@@ -48,8 +14,9 @@
 
     // coordinates of berlin to initialize map
     const BERLIN_LAT = 52.520008;
-    const BERLIN_LON = 13.404954;
+	const BERLIN_LON = 13.404954;
 
+	let flyTo;
     let showDrawer = true;
     let fullSizeDrawer = false;
     let swiper;
@@ -74,7 +41,7 @@
 
     // handle filter change emitted from Filter component
     function handleFilter(event) {
-        // event.detail hold the filter object
+        // event.detail holds the filter object
         const {detail} = event;
         Data.makeRequest(detail);
 
@@ -95,7 +62,11 @@
         let vh = window.innerHeight * 0.01;
         // set the value in the --vh custom property to the root of the document
         document.documentElement.style.setProperty('--vh', `${vh}px`);
-    }
+	}
+	
+	function handleFlyToButton(e) {
+		flyTo = e.detail;
+	}
 
     onMount(() => {
         window.addEventListener('popstate', handlePopstate);
@@ -155,7 +126,7 @@
 						{/if}
 					</ul>
 
-                    <Results/>
+                    <Results on:btnFlyTo={handleFlyToButton} />
                 </div>
 
             </div>
@@ -164,7 +135,7 @@
     </Drawer>
 
     <div class="z-0 flex-auto mapbox">
-        <Mapbox center={[BERLIN_LON, BERLIN_LAT]} zoom={9} data={$Data.data}/>
+        <Mapbox center={[BERLIN_LON, BERLIN_LAT]} zoom={9} data={$Data.data} {flyTo}/>
     </div>
 
 	{#if isLoading}
@@ -174,3 +145,37 @@
         </div>
 	{/if}
 </main>
+
+<style lang="scss">
+    @use '../Assets/css/dev/breakpoints' as *;
+    @use '../Assets/css/dev/variables' as *;
+
+    .mapbox {
+        padding-bottom: 2em;
+
+        @include lg {
+            padding-bottom: 0;
+        }
+    }
+
+
+
+    .loading {
+        background: rgba(0, 0, 0, 0.5);
+    }
+
+    .swiper {
+        width: 200%;
+        transition: transform 300ms;
+
+        > * {
+            width: 50%;
+        }
+    }
+
+    :global(.toggle-full-size) {
+        @include lg {
+            display: none !important;
+        }
+    }
+</style>

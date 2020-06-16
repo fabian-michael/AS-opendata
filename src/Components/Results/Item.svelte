@@ -1,7 +1,11 @@
 <script>
+	import { createEventDispatcher } from 'svelte';
     import Button from '@Components/Button/index.svelte';
-    import {ExternalLinkIcon, CheckIcon, XIcon} from 'svelte-feather-icons';
+    import {ExternalLinkIcon, CheckIcon, XIcon, MapPinIcon} from 'svelte-feather-icons';
 	export let data = {};
+	export let coordinates = [];
+	export let isListItem = false;
+	const dispatch = createEventDispatcher();
 </script>
 
 <div>
@@ -46,9 +50,14 @@
 		{/if}
 	    </p>
 
-	{#if data.w3}
+	{#if data.w3 || isListItem}
         <div class="flex justify-end mt-4">
-            <Button href="{data.w3}" text="Webseite" icon={ExternalLinkIcon} target="_blank" />
+			{#if data.w3}
+            	<Button href="{data.w3}" text="Webseite" icon={ExternalLinkIcon} target="_blank" />
+			{/if}
+			{#if isListItem}
+            	<Button color="green" icon={MapPinIcon} class="ml-4" on:click={() => dispatch('btnFlyTo', coordinates)} />
+			{/if}
         </div>
 	{/if}
 </div>
