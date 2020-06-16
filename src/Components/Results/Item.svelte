@@ -1,6 +1,6 @@
 <script>
 	import { createEventDispatcher } from 'svelte';
-    import Button from '@Components/Button/index.svelte';
+    import {Button} from '@Components';
     import {ExternalLinkIcon, CheckIcon, XIcon, MapPinIcon} from 'svelte-feather-icons';
 	export let data = {};
 	export let coordinates = [];

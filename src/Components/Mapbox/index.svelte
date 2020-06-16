@@ -1,7 +1,7 @@
 <script>
     import {onMount, getContext} from "svelte";
     import mapboxgl from "mapbox-gl/dist/mapbox-gl";
-    import Item from '@Components/Results/Item.svelte';
+    import {ResultsItem} from '@Components';
 
     export let center = [];
     export let zoom = 1;
@@ -138,7 +138,7 @@
             // render popup component
             const placeholder = document.createElement('div');
             placeholder.classList.add('pt-4');
-            new Item({
+            new ResultsItem({
                 target: placeholder,
                 props: {
                     data

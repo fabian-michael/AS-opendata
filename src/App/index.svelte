@@ -1,12 +1,7 @@
 <script>
     import {fade} from 'svelte/transition';
-    import {onMount, onDestroy, setContext} from 'svelte';
-    import Filter from "@Components/Filter/index.svelte";
-    import Mapbox from "@Components/Mapbox/index.svelte";
-    import Loader from "@Components/Loader/index.svelte";
-    import Results from "@Components/Results/index.svelte";
-    import Button from "@Components/Button/index.svelte";
-    import Drawer from "@Components/Drawer/index.svelte";
+	import {onMount, onDestroy, setContext} from 'svelte';
+	import {Filter, Mapbox, Loader, Results, Button, Drawer} from '@Components';
     import Data from '@Stores/data.store';
     import {objectToURLParams, URLParamsToObject} from "@Utilities";
     import {ArrowLeftIcon, ArrowRightIcon, FilterIcon, Maximize2Icon, Minimize2Icon, XIcon} from 'svelte-feather-icons';

@@ -1,7 +1,6 @@
 <script>
 	import Data from '@Stores/data.store';
-	import Loader from '@Components/Loader/index.svelte';
-	import Item from './Item';
+	import {ResultsItem , Loader} from '@Components';
 	import {FrownIcon} from 'svelte-feather-icons';
 	
 	$: isLoading = $Data.state.loading;
@@ -19,7 +18,7 @@
 		</li>
 		{#each $Data.data.features as element}
             <li id="result_{element.properties.data.unique_id}" class="p-4 my-4 text-left bg-white rounded shadow text-gray-dark">
-				<Item data={element.properties.data} coordinates={element.geometry.coordinates} isListItem on:btnFlyTo />
+				<ResultsItem data={element.properties.data} coordinates={element.geometry.coordinates} isListItem on:btnFlyTo />
             </li>
 		{:else}
 			<li>
