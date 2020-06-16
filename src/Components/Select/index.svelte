@@ -1,7 +1,3 @@
-<script context="module">
-    let closeCurrent;
-</script>
-
 <script>
     import uid from 'uid';
 

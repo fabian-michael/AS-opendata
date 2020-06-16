@@ -12,10 +12,14 @@ gestures();
 
 // Initialize App
 const app = new App({
-    target: document.body
+	target: document.body,
 });
 
-// @ts-ignore
+declare global {
+	interface Window {
+		app: App;
+	}
+}
 window.app = app;
 
 export default app;
