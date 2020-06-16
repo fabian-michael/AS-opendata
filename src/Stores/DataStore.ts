@@ -3,6 +3,7 @@ import { API } from '@Services';
 import { FeatureCollection } from 'geojson';
 import { Filter } from '@Types/filter';
 
+// Helper interface for the makeRequest states
 interface State {
 	initial: boolean;
 	loading: boolean;
@@ -10,6 +11,7 @@ interface State {
 	error: boolean;
 }
 
+// Singleton for handling the App state
 class DataStore {
 	// a store that holds a boolean to indicate that something is loading
 	private state = writable({
@@ -29,6 +31,7 @@ class DataStore {
 		count: data.features?.length || 0,
 	}));
 
+	// function to update the state
 	private updateState = ({
 		initial = false,
 		loading = false,
@@ -36,6 +39,7 @@ class DataStore {
 		error = false,
 	}) => this.state.set({ initial, loading, success, error });
 
+	// public subscribe function to observe the derived store
 	public subscribe = this._derived.subscribe;
 
 	public async makeRequest(filter: Filter) {

@@ -2,7 +2,7 @@
     import {fade} from 'svelte/transition';
 	import {onMount, onDestroy, setContext} from 'svelte';
 	import {Filter, Mapbox, Loader, Results, Button, Drawer} from '@Components';
-    import Data from '@Stores/data.store';
+    import Data from '@Stores/DataStore';
     import {objectToURLParams, URLParamsToObject} from "@Utilities";
     import {ArrowLeftIcon, ArrowRightIcon, FilterIcon, Maximize2Icon, Minimize2Icon, XIcon} from 'svelte-feather-icons';
 

@@ -1,5 +1,5 @@
 <script>
-	import Data from '@Stores/data.store';
+	import Data from '@Stores/DataStore';
 	import {ResultsItem , Loader} from '@Components';
 	import {FrownIcon} from 'svelte-feather-icons';
 	
